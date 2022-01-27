@@ -1,0 +1,2 @@
+# KiloOhm
+1kΩ
