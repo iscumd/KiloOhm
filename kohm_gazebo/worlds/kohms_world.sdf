@@ -34,6 +34,8 @@
         name="ignition::gazebo::systems::Imu">
     </plugin>
     
+    
+    
   <!-- Define light source because I like seeing -->
     <light type="directional" name="sun">
       <cast_shadows>true</cast_shadows>

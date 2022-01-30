@@ -49,7 +49,10 @@ def generate_launch_description():
             '/lidar@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
             '/lidar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
             '/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU',
-            '/camera@sensor_msgs/Image@ignition.msgs.Image'
+            '/camera@sensor_msgs/msg/Image[ignition.msgs.Image',
+            '/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
+            #Pull joint states from ignition because the ros2 joint state pub node isnt working for me
+            '/world/kohms_world/model/kohm/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model'
         ],
         output='screen',
         remappings=[
@@ -57,12 +60,14 @@ def generate_launch_description():
             ('/model/kohm/tf', '/tf'),
             ('/model/kohm/cmd_vel', '/cmd_vel'),
             ('/model/kohm/odometry', '/kohm/odom'),
-            ('/model/kohm/joint_state', 'joint_states'),
             ('/lidar', '/kohm/raw_scan'),
             ('/lidar/points', '/kohm/raw_points'),
             ('/imu', '/kohm/imu'),
+            ('/camera', '/kohm/image_raw'),
+            ('/camera_info', '/kohm/camera_info'),
+            ('/world/kohms_world/model/kohm/joint_state', 'joint_states')
         ])
-
+# ('/model/kohm/joint_state', 'joint_states'),
     ign_spawn_robot = Node(package='ros_ign_gazebo',
                            executable='create',
                            arguments=[

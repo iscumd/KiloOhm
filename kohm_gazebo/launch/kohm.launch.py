@@ -12,12 +12,12 @@ from launch.substitutions import LaunchConfiguration
 def generate_launch_description():
     # ROS packages
     pkg_kohm_gazebo = get_package_share_directory('kohm_gazebo')
-    #pkg_robot_state_controller = get_package_share_directory('robot_state_controller')
+    pkg_robot_state_controller = get_package_share_directory('robot_state_controller')
     #pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
 
     # Config
-    #joy_config = os.path.join(pkg_kohm_gazebo, 'config/joystick',
-    #                          'xbone.config.yaml')
+    joy_config = os.path.join(pkg_kohm_gazebo, 'config/joystick',
+                              'xbone.config.yaml')
 
     # Launch arguments
     drive_mode_switch_button = LaunchConfiguration('drive_mode_switch_button', default='8')
@@ -52,6 +52,53 @@ def generate_launch_description():
             'use_sim_time': use_sim_time
         }.items(),
     )
+
+    lidar_processor = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_gazebo, 'launch'),
+            '/include/lidar_processor/lidar_processor.launch.py'
+        ]),
+        launch_arguments={'use_sim_time': use_sim_time}.items(),
+    )
+
+    pointcloud_to_laserscan = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_gazebo, 'launch'),
+            '/include/pointcloud_to_laserscan/pointcloud_to_laserscan.launch.py'
+        ]),
+        launch_arguments={'use_sim_time': use_sim_time}.items(),
+    )
+
+    navigation = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_gazebo, 'launch'),
+            '/include/navigation/navigation.launch.py'
+        ]),
+        launch_arguments={'use_sim_time': use_sim_time}.items(),
+    )
+
+    waypoint_publisher = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_gazebo, 'launch'),
+            '/include/waypoint_publisher/waypoint.launch.py'
+        ]),
+        launch_arguments={
+            'use_sim_time': use_sim_time,
+            'follow_waypoints': follow_waypoints
+        }.items(),
+    )
+
+    robot_state_controller = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_robot_state_controller, 'launch'),
+            '/rsc_with_ipp.launch.py'
+        ]),
+        launch_arguments={
+            'switch_button': drive_mode_switch_button,
+            'use_sim_time': use_sim_time
+        }.items(),
+    )
+    
     
     return LaunchDescription([
         # Launch Arguments
@@ -75,9 +122,9 @@ def generate_launch_description():
         state_publishers,
         ign_gazebo,
         #joy_with_teleop_twist,
-        #lidar_processor,
+        lidar_processor,
         
-        #pointcloud_to_laserscan,
+        pointcloud_to_laserscan,
         #navigation,
         rviz,
         #waypoint_publisher,
