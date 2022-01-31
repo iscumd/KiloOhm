@@ -33,7 +33,7 @@ from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
     # ROS Packages
-    pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
+    pkg_mammoth_gazebo = get_package_share_directory('kohm_gazebo')
     pkg_slam_toolbox = get_package_share_directory('slam_toolbox')
 
     # Arguments

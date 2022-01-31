@@ -132,12 +132,12 @@ def generate_launch_description():
         # Nodes
         state_publishers,
         ign_gazebo,
-        joy_with_teleop_twist,
+        #joy_with_teleop_twist,
         lidar_processor,
         
         pointcloud_to_laserscan,
         #navigation,
         rviz,
-        #waypoint_publisher,
+        waypoint_publisher,
         robot_state_controller,
     ])

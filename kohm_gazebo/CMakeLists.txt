@@ -21,11 +21,13 @@ find_package(ament_cmake REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
+
 #INSTALL
 install(
-    DIRECTORY launch worlds models
+    DIRECTORY launch worlds models config
     DESTINATION share/${PROJECT_NAME}/
     )
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
