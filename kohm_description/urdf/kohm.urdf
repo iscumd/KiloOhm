@@ -22,9 +22,9 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <mass value="28"/>
             <inertia
-                ixx="0.166667" ixy="0.0" ixz="0.0"
-                iyy="0.166667" iyz="0.0"
-                izz="0.166667"/>
+                ixx="0.451733" ixy="0.0" ixz="0.0"
+                iyy="1.89" iyz="0.0"
+                izz="2.341733"/>
         </inertial>
     </link>
     
@@ -55,9 +55,9 @@
             <origin xyz="0 0 0" rpy="1.5708 0 0"/>
             <mass value="2.25"/>
             <inertia
-                ixx="0.145833" ixy="0.0" ixz="0.0"
-                iyy="0.145833" iyz="0.0"
-                izz="0.125"/>
+                ixx="0.017189" ixy="0.0" ixz="0.0"
+                iyy="0.017189" iyz="0.0"
+                izz="0.030628"/>
         </inertial>
     </link>
     
@@ -86,9 +86,9 @@
             <origin xyz="0 0 0" rpy="1.5708 0 0"/>
             <mass value="2.25"/>
             <inertia
-                ixx="0.145833" ixy="0.0" ixz="0.0"
-                iyy="0.145833" iyz="0.0"
-                izz="0.125"/>
+                ixx="0.017189" ixy="0.0" ixz="0.0"
+                iyy="0.017189" iyz="0.0"
+                izz="0.030628"/>
         </inertial>
     </link>
     
@@ -97,8 +97,134 @@
         <parent link="base_link"/>
         <child link="right_front_wheel"/>
         <axis xyz="0 1 0"/>
+    </joint> 
+    
+    <!-- Right rear wheel link and joint -->
+    <link name="right_rear_wheel">
+        <visual>
+            <origin rpy="1.5708 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.1" radius="0.165"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="1.5708 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.1" radius="0.165"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+            <mass value="2.25"/>
+            <inertia
+                ixx="0.017189" ixy="0.0" ixz="0.0"
+                iyy="0.017189" iyz="0.0"
+                izz="0.030628"/>
+        </inertial>
+    </link>
+    
+    <joint name="right_rear_wheel_to_base_link" type="continuous">
+        <origin rpy="0 0 0" xyz="-0.285 -0.27 -0.0508"/>
+        <parent link="base_link"/>
+        <child link="right_rear_wheel"/>
+        <axis xyz="0 1 0"/>
     </joint>
     
+    
+    
+    <!-- Left rear wheel link and joint -->
+    <link name="left_rear_wheel">
+        <visual>
+            <origin rpy="1.5708 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.1" radius="0.165"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="1.5708 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.1" radius="0.165"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+            <mass value="2.25"/>
+            <inertia
+                ixx="0.017189" ixy="0.0" ixz="0.0"
+                iyy="0.017189" iyz="0.0"
+                izz="0.030628"/>
+        </inertial>
+    </link>
+    
+    <joint name="left_rear_wheel_to_base_link" type="continuous">
+        <origin rpy="0 0 0" xyz="-0.285 0.27 -0.0508"/>
+        <parent link="base_link"/>
+        <child link="left_rear_wheel"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+    
+    <!-- Left mid wheel link and joint -->
+    <link name="left_mid_wheel">
+        <visual>
+            <origin rpy="1.5708 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.1" radius="0.165"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="1.5708 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.1" radius="0.165"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+            <mass value="2.25"/>
+            <inertia
+                ixx="0.017189" ixy="0.0" ixz="0.0"
+                iyy="0.017189" iyz="0.0"
+                izz="0.030628"/>
+        </inertial>
+    </link>
+    
+    <joint name="left_mid_wheel_to_base_link" type="continuous">
+        <origin rpy="0 0 0" xyz="0 0.27 -0.0508"/>
+        <parent link="base_link"/>
+        <child link="left_mid_wheel"/>
+        <axis xyz="0 1 0"/>
+    </joint>    
+    
+    
+    <!--Right mid wheel link and joint -->
+    <link name="right_mid_wheel">
+        <visual>
+            <origin rpy="1.5708 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.1" radius="0.165"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="1.5708 0 0" xyz="0 0 0" />
+            <geometry>
+                <cylinder length="0.1" radius="0.165"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+            <mass value="2.25"/>
+            <inertia
+                ixx="0.017189" ixy="0.0" ixz="0.0"
+                iyy="0.017189" iyz="0.0"
+                izz="0.030628"/>
+        </inertial>
+    </link>
+    
+    <joint name="right_mid_wheel_to_base_link" type="continuous">
+        <origin rpy="0 0 0" xyz="0 -0.27 -0.0508"/>
+        <parent link="base_link"/>
+        <child link="right_mid_wheel"/>
+        <axis xyz="0 1 0"/>
+    </joint>    
     
     
 <!-- Mast links and joints -->    
@@ -119,9 +245,9 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <mass value="1"/>
             <inertia
-                ixx="0.166667" ixy="0.0" ixz="0.0"
-                iyy="0.166667" iyz="0.0"
-                izz="0.166667"/>
+                ixx="5.4e-05" ixy="0.0" ixz="0.0"
+                iyy="5.4e-05" iyz="0.0"
+                izz="0.000108"/>
         </inertial>
     </link>
 
@@ -149,9 +275,9 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <mass value="1"/>
             <inertia
-                ixx="0.166667" ixy="0.0" ixz="0.0"
-                iyy="0.166667" iyz="0.0"
-                izz="0.166667"/>
+                ixx="5.4e-05" ixy="0.0" ixz="0.0"
+                iyy="5.4e-05" iyz="0.0"
+                izz="0.000108"/>
         </inertial>
     </link>
     
@@ -179,9 +305,9 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <mass value="1"/>
             <inertia
-                ixx="0.166667" ixy="0.0" ixz="0.0"
-                iyy="0.166667" iyz="0.0"
-                izz="0.166667"/>
+                ixx="5.4e-05" ixy="0.0" ixz="0.0"
+                iyy="0.013763" iyz="0.0"
+                izz="0.013817"/>
         </inertial>
     </link>
     
@@ -209,9 +335,9 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <mass value="1"/>
             <inertia
-                ixx="0.166667" ixy="0.0" ixz="0.0"
-                iyy="0.166667" iyz="0.0"
-                izz="0.166667"/>
+                ixx="5.4e-05" ixy="0.0" ixz="0.0"
+                iyy="0.086021" iyz="0.0"
+                izz="0.086075"/>
         </inertial>
     </link>
     
@@ -219,37 +345,6 @@
         <origin rpy="0 0 0" xyz="-0.012 0 1.4224"/>
         <parent link="base_link"/>
         <child link="top_mast_pillar"/>
-    </joint>
-    
-    
-<!-- Caster wheel link and joint -->    
-    <link name="caster_wheel">
-        <visual>
-            <origin rpy="0 0 0" xyz="0 0 0" />
-            <geometry>
-                <sphere radius="0.1651"/>
-            </geometry>
-        </visual>
-        <collision>
-            <origin rpy="0 0 0" xyz="0 0 0" />
-            <geometry>
-                <sphere radius="0.165"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <mass value="2"/>
-            <inertia
-                ixx="0.1" ixy="0.0" ixz="0.0"
-                iyy="0.1" iyz="0.0"
-                izz="0.1"/>
-        </inertial>
-    </link>
-    
-    <joint name="caster_wheel_to_base_link" type="fixed">
-        <origin rpy="0 0 0" xyz="-0.285 0 -0.0508"/>
-        <parent link="base_link"/>
-        <child link="caster_wheel"/>
     </joint>
     
     
@@ -271,9 +366,9 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <mass value="1"/>
             <inertia
-                ixx="0.145833" ixy="0.0" ixz="0.0"
-                iyy="0.145833" iyz="0.0"
-                izz="0.125"/>
+                ixx="0.003387" ixy="0.0" ixz="0.0"
+                iyy="0.003387" iyz="0.0"
+                izz="0.002903"/>
         </inertial>
     </link>
     
@@ -302,9 +397,9 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <mass value="1"/>
             <inertia
-                ixx="0.166667" ixy="0.0" ixz="0.0"
-                iyy="0.166667" iyz="0.0"
-                izz="0.166667"/>
+                ixx="5.4e-05" ixy="0.0" ixz="0.0"
+                iyy="5.4e-05" iyz="0.0"
+                izz="0.000108"/>
         </inertial>
         <sensor name="imu_sensor" type="imu">
             <always_on>1</always_on>
@@ -340,9 +435,9 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <mass value="0.1"/>
             <inertia
-                ixx="0.166667" ixy="0.0" ixz="0.0"
-                iyy="0.166667" iyz="0.0"
-                izz="0.166667"/>
+                ixx="0.000215" ixy="0.0" ixz="0.0"
+                iyy="0.00086" iyz="0.0"
+                izz="0.001075"/>
         </inertial>
     </link>
     
@@ -358,8 +453,11 @@
     <plugin filename="libignition-gazebo-diff-drive-system.so"
               name="ignition::gazebo::systems::DiffDrive">
       <left_joint>left_front_wheel_to_base_link</left_joint>
+      <left_joint>left_rear_wheel_to_base_link</left_joint>
+      <left_joint>left_mid_wheel_to_base_link</left_joint>
       <right_joint>right_front_wheel_to_base_link</right_joint>
-
+      <right_joint>right_rear_wheel_to_base_link</right_joint>
+      <right_joint>right_mid_wheel_to_base_link</right_joint>
 
       <wheel_separation>0.45</wheel_separation>
       <wheel_radius>0.165</wheel_radius>
@@ -420,7 +518,7 @@
     </sensor>
   </gazebo>
   
-<!--Gets joint states from model and sends them to ros2 -->  
+<!--Gets joint states from gazebo model so that they can be sent to ros2 over ign_bridge -->
   <gazebo>
     <plugin filename="libignition-gazebo-joint-state-publisher-system.so" name="ignition::gazebo::systems::JointStatePublisher"/>
   </gazebo>
