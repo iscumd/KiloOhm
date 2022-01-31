@@ -13,7 +13,7 @@ def generate_launch_description():
     # ROS packages
     pkg_kohm_gazebo = get_package_share_directory('kohm_gazebo')
     pkg_robot_state_controller = get_package_share_directory('robot_state_controller')
-    #pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
+    pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
 
     # Config
     joy_config = os.path.join(pkg_kohm_gazebo, 'config/joystick',
@@ -40,6 +40,17 @@ def generate_launch_description():
             os.path.join(pkg_kohm_gazebo, 'launch'),
             '/include/gazebo/gazebo.launch.py'
         ]), )
+    
+    
+    joy_with_teleop_twist = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_teleop_twist_joy, 'launch', 'teleop-launch.py')),
+        launch_arguments={
+            'joy_config': 'xbox',
+            'joy_dev': '/dev/input/js0',
+            'config_filepath': joy_config
+        }.items(),
+    )
         
         
     rviz = IncludeLaunchDescription(
@@ -121,12 +132,12 @@ def generate_launch_description():
         # Nodes
         state_publishers,
         ign_gazebo,
-        #joy_with_teleop_twist,
+        joy_with_teleop_twist,
         lidar_processor,
         
         pointcloud_to_laserscan,
         #navigation,
         rviz,
         #waypoint_publisher,
-        #robot_state_controller,
+        robot_state_controller,
     ])
