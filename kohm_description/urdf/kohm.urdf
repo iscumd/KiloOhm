@@ -518,9 +518,9 @@
     </sensor>
   </gazebo>
   
-<!--Gets joint states from gazebo model so that they can be sent to ros2 over ign_bridge -->
+<!--Gets joint states from gazebo model so that they can be sent to ros2 over ign_bridge
   <gazebo>
     <plugin filename="libignition-gazebo-joint-state-publisher-system.so" name="ignition::gazebo::systems::JointStatePublisher"/>
-  </gazebo>
+  </gazebo> -->
 </robot>
             

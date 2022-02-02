@@ -41,7 +41,7 @@ def generate_launch_description():
         package='ros_ign_bridge',
         executable='parameter_bridge',
         arguments=[
-            '/world/test/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
+            '/world/kohms_world/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
             '/model/kohm/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V',
             '/model/kohm/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
             '/model/kohm/odometry@nav_msgs/msg/Odometry[ignition.msgs.Odometry',
@@ -50,13 +50,13 @@ def generate_launch_description():
             '/lidar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
             '/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU',
             '/camera@sensor_msgs/msg/Image[ignition.msgs.Image',
-            '/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
+            '/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo'
             #Pull joint states from ignition because the ros2 joint state pub node isnt working for me
-            '/world/kohms_world/model/kohm/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model'
+            #'/world/kohms_world/model/kohm/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model'
         ],
         output='screen',
         remappings=[
-            ('/world/test/clock', '/clock'),
+            ('/world/kohms_world/clock', '/clock'),
             ('/model/kohm/tf', '/tf'),
             ('/model/kohm/cmd_vel', '/cmd_vel'),
             ('/model/kohm/odometry', '/kohm/odom'),
@@ -64,10 +64,11 @@ def generate_launch_description():
             ('/lidar/points', '/kohm/raw_points'),
             ('/imu', '/kohm/imu'),
             ('/camera', '/kohm/image_raw'),
-            ('/camera_info', '/kohm/camera_info'),
-            ('/world/kohms_world/model/kohm/joint_state', 'joint_states')
+            ('/camera_info', '/kohm/camera_info')
+            #('/world/kohms_world/model/kohm/joint_state', 'joint_states')
         ])
-# ('/model/kohm/joint_state', 'joint_states'),
+        
+        #('/model/kohm/joint_state', 'joint_states'),
     ign_spawn_robot = Node(package='ros_ign_gazebo',
                            executable='create',
                            arguments=[
