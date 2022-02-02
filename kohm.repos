@@ -27,3 +27,8 @@ repositories:
     type: git
     url: https://github.com/iscumd/WayPoint_Publisher.git
     version: master        
+  sensor_processor:
+    type: git
+    url: https://github.com/iscumd/sensor_processor.git
+    version: master
+    
