@@ -78,6 +78,552 @@
       </link>
     </model>
     
+    
+<!-- Define barrel models and placements NOTE: Dont include any more barrels as it will overflow gazebos hash table and crash gazebo--> 
+    <include>
+        <name>cb1</name>
+        <pose>3 1 0 0 0 0</pose>
+        <uri>
+            https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Construction Barrel
+        </uri>
+    </include>
+    
+    
+    
+    <!--<include>
+        <name>cb2</name>
+        <pose>6 -1 0 0 0 0</pose>
+        <uri>
+            https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Construction Barrel
+        </uri>
+    </include>-->
+    
+    <!--<include>
+        <name>cb3</name>
+        <pose>7.5 -5 0 0 0 0</pose>
+        <uri>
+            https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Construction Barrel
+        </uri>
+    </include>-->
+    
+    <include>
+        <name>cb4</name>
+        <pose>3 -9 0 0 0 0</pose>
+        <uri>
+            https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Construction Barrel
+        </uri>
+    </include>
+    
+    <!--<include>
+        <name>cb5</name>
+        <pose>-4 -11 0 0 0 0</pose>
+        <uri>
+            https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Construction Barrel
+        </uri>
+    </include>-->
+    
+    <include>
+        <name>cb6</name>
+        <pose>-4 -11 0 0 0 0</pose>
+        <uri>
+            https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Construction Barrel
+        </uri>
+    </include>
+    
+    <include>
+        <name>cb7</name>
+        <pose>-5 -1.5 0 0 0 0</pose>
+        <uri>
+            https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Construction Barrel
+        </uri>
+    </include>-->
+
+    
+<!-- Define line models and placements -->    
+    
+    <model name="white_line_l1">
+      <static>true</static>
+        <link name="link_ground">
+          <pose>0.0 1.524 0.01 0 0 1.5708</pose>
+          <!--<collision name="collision">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 13</size>
+              </plane>
+            </geometry>
+            
+            <surface>
+              <friction>
+                <ode>
+                  <mu>100</mu>
+                  <mu2>50</mu2>
+                </ode>
+              </friction>
+            </surface>
+          </collision>-->
+          <visual name="visual_ground">
+            <cast_shadows>false</cast_shadows>
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 13</size>
+              </plane>
+            </geometry>
+           <material>
+             <ambient>1.0 1.0 1.0 1.0</ambient>
+             <diffuse>1.0 1.0 1.0 1.0</diffuse>
+             <specular>1.0 1.0 1.0 1.0</specular>
+             <emissive>1.0 1.0 1.0 1.0</emissive>
+           </material>
+          </visual>
+        </link>
+      </model>
+      
+      
+    <model name="white_line_r1">
+      <static>true</static>
+        <link name="link_ground">
+          <pose>0.0 -1.524 0.01 0 0 1.5708</pose>
+          <!--<collision name="collision">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 12</size>
+              </plane>
+            </geometry>
+            
+            <surface>
+              <friction>
+                <ode>
+                  <mu>100</mu>
+                  <mu2>50</mu2>
+                </ode>
+              </friction>
+            </surface>
+          </collision>-->
+          <visual name="visual_ground">
+            <cast_shadows>false</cast_shadows>
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 12</size>
+              </plane>
+            </geometry>
+           <material>
+             <ambient>1.0 1.0 1.0 1.0</ambient>
+             <diffuse>1.0 1.0 1.0 1.0</diffuse>
+             <specular>1.0 1.0 1.0 1.0</specular>
+             <emissive>1.0 1.0 1.0 1.0</emissive>
+           </material>
+          </visual>
+        </link>
+      </model>
+      
+      
+      
+      
+    <model name="white_line_r2">
+      <static>true</static>
+        <link name="link_ground">
+          <pose>0.0 -11.524 0.01 0 0 1.5708</pose>
+          <!--<collision name="collision">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 13</size>
+              </plane>
+            </geometry>
+            <surface>
+              <friction>
+                <ode>
+                  <mu>100</mu>
+                  <mu2>50</mu2>
+                </ode>
+              </friction>
+            </surface>
+          </collision>-->
+          <visual name="visual_ground">
+            <cast_shadows>false</cast_shadows>
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 13</size>
+              </plane>
+            </geometry>
+           <material>
+             <ambient>1.0 1.0 1.0 1.0</ambient>
+             <diffuse>1.0 1.0 1.0 1.0</diffuse>
+             <specular>1.0 1.0 1.0 1.0</specular>
+             <emissive>1.0 1.0 1.0 1.0</emissive>
+           </material>
+          </visual>
+        </link>
+      </model>         
+    
+    
+    <model name="white_line_l2">
+      <static>true</static>
+        <link name="link_ground">
+          <pose>0.0 -8.476 0.01 0 0 1.5708</pose>
+          <!--<collision name="collision">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 12</size>
+              </plane>
+            </geometry>
+            
+            <surface>
+              <friction>
+                <ode>
+                  <mu>100</mu>
+                  <mu2>50</mu2>
+                </ode>
+              </friction>
+            </surface>
+          </collision>-->
+          <visual name="visual_ground">
+            <cast_shadows>false</cast_shadows>
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 12</size>
+              </plane>
+            </geometry>
+           <material>
+             <ambient>1.0 1.0 1.0 1.0</ambient>
+             <diffuse>1.0 1.0 1.0 1.0</diffuse>
+             <specular>1.0 1.0 1.0 1.0</specular>
+             <emissive>1.0 1.0 1.0 1.0</emissive>
+           </material>
+          </visual>
+        </link>
+      </model>
+      
+      
+    <model name="white_line_t1">
+      <static>true</static>
+        <link name="link_ground">
+          <pose>6 -5 0.01 0 0 0</pose>
+          <!--<collision name="collision">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 7.048</size>
+              </plane>
+            </geometry>
+            
+            <surface>
+              <friction>
+                <ode>
+                  <mu>100</mu>
+                  <mu2>50</mu2>
+                </ode>
+              </friction>
+            </surface>
+          </collision>-->
+          <visual name="visual_ground">
+            <cast_shadows>false</cast_shadows>
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 7.048</size>
+              </plane>
+            </geometry>
+           <material>
+             <ambient>1.0 1.0 1.0 1.0</ambient>
+             <diffuse>1.0 1.0 1.0 1.0</diffuse>
+             <specular>1.0 1.0 1.0 1.0</specular>
+             <emissive>1.0 1.0 1.0 1.0</emissive>
+           </material>
+          </visual>
+        </link>
+      </model>
+      
+      
+    <model name="white_line_t2">
+      <static>true</static>
+        <link name="link_ground">
+          <pose>9.048 -5 0.01 0 0 0</pose>
+          <!--<collision name="collision">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 8</size>
+              </plane>
+            </geometry>
+            
+            <surface>
+              <friction>
+                <ode>
+                  <mu>100</mu>
+                  <mu2>50</mu2>
+                </ode>
+              </friction>
+            </surface>
+          </collision>-->
+          <visual name="visual_ground">
+            <cast_shadows>false</cast_shadows>
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 8</size>
+              </plane>
+            </geometry>
+           <material>
+             <ambient>1.0 1.0 1.0 1.0</ambient>
+             <diffuse>1.0 1.0 1.0 1.0</diffuse>
+             <specular>1.0 1.0 1.0 1.0</specular>
+             <emissive>1.0 1.0 1.0 1.0</emissive>
+           </material>
+          </visual>
+        </link>
+      </model>
+      
+      
+    <model name="white_line_t3">
+      <static>true</static>
+        <link name="link_ground">
+          <pose>-6 -5 0.01 0 0 0</pose>
+          <!--<collision name="collision">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 7.048</size>
+              </plane>
+            </geometry>
+            
+            <surface>
+              <friction>
+                <ode>
+                  <mu>100</mu>
+                  <mu2>50</mu2>
+                </ode>
+              </friction>
+            </surface>
+          </collision>-->
+          <visual name="visual_ground">
+            <cast_shadows>false</cast_shadows>
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 7.048</size>
+              </plane>
+            </geometry>
+           <material>
+             <ambient>1.0 1.0 1.0 1.0</ambient>
+             <diffuse>1.0 1.0 1.0 1.0</diffuse>
+             <specular>1.0 1.0 1.0 1.0</specular>
+             <emissive>1.0 1.0 1.0 1.0</emissive>
+           </material>
+          </visual>
+        </link>
+      </model>      
+      
+    <model name="white_line_t4">
+      <static>true</static>
+        <link name="link_ground">
+          <pose>-9.048 -5 0.01 0 0 0</pose>
+          <!--<collision name="collision">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 8</size>
+              </plane>
+            </geometry>
+            
+            <surface>
+              <friction>
+                <ode>
+                  <mu>100</mu>
+                  <mu2>50</mu2>
+                </ode>
+              </friction>
+            </surface>
+          </collision>-->
+          <visual name="visual_ground">
+            <cast_shadows>false</cast_shadows>
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 8</size>
+              </plane>
+            </geometry>
+           <material>
+             <ambient>1.0 1.0 1.0 1.0</ambient>
+             <diffuse>1.0 1.0 1.0 1.0</diffuse>
+             <specular>1.0 1.0 1.0 1.0</specular>
+             <emissive>1.0 1.0 1.0 1.0</emissive>
+           </material>
+          </visual>
+        </link>
+      </model>
+      
+    <model name="white_line_d1">
+      <static>true</static>
+        <link name="link_ground">
+          <pose>7.7 0.3 0.01 0 0 0.785398</pose>
+          <!--<collision name="collision">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 4</size>
+              </plane>
+            </geometry>
+            
+            <surface>
+              <friction>
+                <ode>
+                  <mu>100</mu>
+                  <mu2>50</mu2>
+                </ode>
+              </friction>
+            </surface>
+          </collision>-->
+          <visual name="visual_ground">
+            <cast_shadows>false</cast_shadows>
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 4</size>
+              </plane>
+            </geometry>
+           <material>
+             <ambient>1.0 1.0 1.0 1.0</ambient>
+             <diffuse>1.0 1.0 1.0 1.0</diffuse>
+             <specular>1.0 1.0 1.0 1.0</specular>
+             <emissive>1.0 1.0 1.0 1.0</emissive>
+           </material>
+          </visual>
+        </link>
+      </model> 
+      
+      
+    <model name="white_line_d2">
+      <static>true</static>
+        <link name="link_ground">
+          <pose>7.7 -10.3 0.01 0 0 -0.785398</pose>
+          <!--<collision name="collision">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 4</size>
+              </plane>
+            </geometry>
+            
+            <surface>
+              <friction>
+                <ode>
+                  <mu>100</mu>
+                  <mu2>50</mu2>
+                </ode>
+              </friction>
+            </surface>
+          </collision>-->
+          <visual name="visual_ground">
+            <cast_shadows>false</cast_shadows>
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 4</size>
+              </plane>
+            </geometry>
+           <material>
+             <ambient>1.0 1.0 1.0 1.0</ambient>
+             <diffuse>1.0 1.0 1.0 1.0</diffuse>
+             <specular>1.0 1.0 1.0 1.0</specular>
+             <emissive>1.0 1.0 1.0 1.0</emissive>
+           </material>
+          </visual>
+        </link>
+      </model>
+      
+      
+      
+      
+    <model name="white_line_d3">
+      <static>true</static>
+        <link name="link_ground">
+          <pose>-7.7 0.3 0.01 0 0 -0.785398</pose>
+          <!--<collision name="collision">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 4</size>
+              </plane>
+            </geometry>
+            
+            <surface>
+              <friction>
+                <ode>
+                  <mu>100</mu>
+                  <mu2>50</mu2>
+                </ode>
+              </friction>
+            </surface>
+          </collision>-->
+          <visual name="visual_ground">
+            <cast_shadows>false</cast_shadows>
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 4</size>
+              </plane>
+            </geometry>
+           <material>
+             <ambient>1.0 1.0 1.0 1.0</ambient>
+             <diffuse>1.0 1.0 1.0 1.0</diffuse>
+             <specular>1.0 1.0 1.0 1.0</specular>
+             <emissive>1.0 1.0 1.0 1.0</emissive>
+           </material>
+          </visual>
+        </link>
+      </model>       
+      
+      
+      
+      
+    <model name="white_line_d4">
+      <static>true</static>
+        <link name="link_ground">
+          <pose>-7.7 -10.3 0.01 0 0 0.785398</pose>
+          <!--<collision name="collision">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 4</size>
+              </plane>
+            </geometry>
+            
+            <surface>
+              <friction>
+                <ode>
+                  <mu>100</mu>
+                  <mu2>50</mu2>
+                </ode>
+              </friction>
+            </surface>
+          </collision>-->
+          <visual name="visual_ground">
+            <cast_shadows>false</cast_shadows>
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>0.1524 4</size>
+              </plane>
+            </geometry>
+           <material>
+             <ambient>1.0 1.0 1.0 1.0</ambient>
+             <diffuse>1.0 1.0 1.0 1.0</diffuse>
+             <specular>1.0 1.0 1.0 1.0</specular>
+             <emissive>1.0 1.0 1.0 1.0</emissive>
+           </material>
+          </visual>
+        </link>
+      </model>
+            
+    
   </world>
 </sdf>
     
