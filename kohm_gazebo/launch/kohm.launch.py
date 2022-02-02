@@ -71,6 +71,14 @@ def generate_launch_description():
         ]),
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
+    
+    sensor_processor = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_gazebo, 'launch'),
+            '/include/sensor_processor/sensor_processor.launch.py'
+        ]),
+        launch_arguments={'use_sim_time': use_sim_time}.items(),
+    )
 
     pointcloud_to_laserscan = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
@@ -134,7 +142,7 @@ def generate_launch_description():
         ign_gazebo,
         #joy_with_teleop_twist,
         lidar_processor,
-        
+        sensor_processor,
         pointcloud_to_laserscan,
         #navigation,
         rviz,
