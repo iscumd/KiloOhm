@@ -25,7 +25,7 @@ def generate_launch_description():
                 arguments=[
                     '-d',
                     os.path.join(pkg_kohm_description, 'rviz',
-                                 'kohm_rviz_config2.rviz')
+                                 'kohm_gazebo.rviz')
                 ],
                 parameters=[{
                     'use_sim_time': use_sim_time
