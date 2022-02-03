@@ -22,4 +22,12 @@ repositories:
   waypoint_publisher:
     type: git
     url: https://github.com/iscumd/WayPoint_Publisher.git
-    version: master        
+    version: master
+  robot_state_controller:
+    type: git
+    url: https://github.com/iscumd/robot_state_controller.git
+    version: ros2
+  sensor_processor:
+    type: git
+    url: https://github.com/iscumd/sensor_processor.git
+    version: master
