@@ -33,7 +33,7 @@ def generate_launch_description():
             os.path.join(pkg_ros_ign_gazebo, 'launch',
                          'ign_gazebo.launch.py')),
         launch_arguments={
-            'ign_args': '-r ' + pkg_kohm_gazebo + '/worlds/kohms_world.sdf'
+            'ign_args': '-r ' + pkg_kohm_gazebo + '/worlds/test.sdf'
         }.items(),
     )
 
@@ -58,7 +58,7 @@ def generate_launch_description():
         remappings=[
             ('/world/kohms_world/clock', '/clock'),
             ('/model/kohm/tf', '/tf'),
-            ('/model/kohm/cmd_vel', '/cmd_vel'),
+            ('/model/kohm/cmd_vel', '/robot/cmd_vel'),
             ('/model/kohm/odometry', '/kohm/odom'),
             ('/lidar', '/kohm/raw_scan'),
             ('/lidar/points', '/kohm/raw_points'),
