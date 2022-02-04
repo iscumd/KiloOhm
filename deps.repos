@@ -34,4 +34,4 @@ repositories:
   white_line_detection:
     type: git
     url: https://github.com/iscumd/white_line_detection.git
-    version: master
+    version: main
