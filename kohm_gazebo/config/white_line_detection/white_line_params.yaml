@@ -1,19 +1,19 @@
 white_line_detection:
   ros__parameters:
-    calibration_constants_A: 0.0
-    calibration_constants_B: 0.0
-    calibration_constants_C: 0.0
-    calibration_constants_D: 0.0
-    pixel_coordinates_tpl_x: 0
-    pixel_coordinates_tpl_y: 0
-    pixel_coordinates_tpr_x: 0
-    pixel_coordinates_tpr_y: 0
-    pixel_coordinates_btl_x: 0
-    pixel_coordinates_btl_y: 0
-    pixel_coordinates_btr_x: 0
-    pixel_coordinates_btr_y: 0
-    pixel_coordinates_ratio: 1.0
+    calibration_constants_A: 1.0
+    calibration_constants_B: 1.0
+    calibration_constants_C: 1.0
+    calibration_constants_D: 1.0
+    pixel_coordinates_tl_x: 0
+    pixel_coordinates_tl_y: 0
+    pixel_coordinates_tr_x: 320
+    pixel_coordinates_tr_y: 0
+    pixel_coordinates_bl_x: 0
+    pixel_coordinates_bl_y: 240
+    pixel_coordinates_br_x: 320
+    pixel_coordinates_br_y: 240
+    pixel_coordinates_ratio: 0.5
     kernelSize: 5
-    enableImShow: false
+    enableImShow: true
     nthPixel: 5
     lowColor: 160
