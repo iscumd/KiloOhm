@@ -13,6 +13,7 @@ def generate_launch_description():
     # ROS packages
     pkg_kohm_gazebo = get_package_share_directory('kohm_gazebo')
     pkg_robot_state_controller = get_package_share_directory('robot_state_controller')
+    pkg_white_line_detection = get_package_share_directory('white_line_detection')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
 
     # Config
@@ -117,7 +118,15 @@ def generate_launch_description():
             'use_sim_time': use_sim_time
         }.items(),
     )
-    
+    white_line_detection = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_white_line_detection, 'launch'),
+            '/white_line_detection.launch.py'
+        ]),
+        launch_arguments={
+            'use_sim_time': use_sim_time
+        }.items(),
+    )
     
     return LaunchDescription([
         # Launch Arguments
@@ -148,4 +157,5 @@ def generate_launch_description():
         rviz,
         waypoint_publisher,
         robot_state_controller,
+        white_line_detection
     ])
