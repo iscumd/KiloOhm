@@ -35,3 +35,8 @@ repositories:
     type: git
     url: https://github.com/iscumd/sensor_processor.git
     version: master
+  white_line_detection:
+    type: git
+    url: https://github.com/iscumd/white_line_detection.git
+    version: master
+
