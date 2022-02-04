@@ -120,7 +120,7 @@ def generate_launch_description():
 
     white_line_detection = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            os.path.join(pkg_kohm_gazebo, 'launch'),
+            os.path.join(pkg_kohm_gazebo, 'launch/include/white_line_detection'),
             '/white_line_detection.launch.py'
         ]),
         launch_arguments={
