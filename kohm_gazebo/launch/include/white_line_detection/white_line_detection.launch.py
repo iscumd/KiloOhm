@@ -48,7 +48,7 @@ def generate_launch_description():
         output='screen',
         remappings=[
             ('/camera/camera_points', '/kohm/camera_points'),
-            ('/camera/image_raw', '/kohm/unfiltered_image_raw'),
+            ('/camera/image_raw', '/kohm/image_raw'),
             ('/camera/camera_info', '/kohm/camera_info')
         ],
         parameters=[
