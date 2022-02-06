@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>kohm_robot</name>
+  <version>0.0.2</version>
+  <description>Kohm is a friendly autonomous robot. This package is for the Kohm robot.</description>
+  <maintainer email="isc-robotics@umich.edu">Intelligent Systems Club</maintainer>
+  <maintainer email="dcutting@umich.edu">David Cutting</maintainer>
+  <maintainer email="agirven@umich.edu">Avery Girven</maintainer>
+  <maintainer email="avealov@umich.edu">Andy Ealovega</maintainer>
+  <maintainer email="jkrasan@umich.edu">Jordan Krasan</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>kohm_description</exec_depend>
+  <exec_depend>ros2_ouster</exec_depend> 
+  <exec_depend>lidar_processor</exec_depend>
+  <exec_depend>isc_roboteq</exec_depend>        
+  <exec_depend>realsense2_camera</exec_depend>
+  <depend>robot_state_controller</depend>
+  <test_depend>ament_lint_auto</test_depend>
+
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
