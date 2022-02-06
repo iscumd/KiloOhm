@@ -460,7 +460,7 @@ def generate_launch_description():
                         PythonExpression([LaunchConfiguration("config_file")])
                     ],
                     remappings=[
-                        ('/camera/odom/sample', '/mammoth/odom'),
+                        ('/camera/odom/sample', '/kohm/odom'),
                     ],
                     output='screen',
                     arguments=[
