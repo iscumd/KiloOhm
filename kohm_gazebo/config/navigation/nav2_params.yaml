@@ -108,7 +108,7 @@ controller_server:
       stateful: True
     FollowPath:
       plugin: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
-      desired_linear_vel: 0.75
+      desired_linear_vel: 2.0
       lookahead_dist: 2.1
       min_lookahead_dist: 2.0
       max_lookahead_dist: 2.50
@@ -183,7 +183,7 @@ global_costmap:
       global_frame: map
       robot_base_frame: base_footprint
       use_sim_time: True
-      footprint: "[ [0.45, 0.3], [0.45, -0.3], [-0.45, -0.3], [-0.45, 0.3] ]"
+      robot_radius: 0.52
       resolution: 0.05
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
@@ -193,7 +193,7 @@ global_costmap:
         observation_sources: scan
         scan:
           topic: /scan
-          obstacle_max_range: 3.0
+          obstacle_max_range: 4.0
           obstacle_min_range: 0.0
           raytrace_max_range: 5.0
           raytrace_min_range: 0.0
@@ -202,7 +202,7 @@ global_costmap:
           clearing: True
           marking: True
           data_type: "LaserScan"
-          inf_is_valid: false         
+          inf_is_valid: false 
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
         map_subscribe_transient_local: True
