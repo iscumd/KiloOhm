@@ -9,14 +9,6 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
 
-def generate_robot_model(pkg_description):
-    urdf_dir = os.path.join(pkg_description, 'urdf')
-    urdf_file = os.path.join(urdf_dir, 'kohm.urdf')
-    with open(urdf_file, 'r') as infp:
-        robot_desc = infp.read()
-    return robot_desc, urdf_file
-
-
 def generate_launch_description():
     # ROS packages
     pkg_kohm_description = get_package_share_directory(
@@ -24,8 +16,6 @@ def generate_launch_description():
     pkg_kohm_gazebo = get_package_share_directory('kohm_gazebo')
     pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
 
-    # Launch arguments
-    robot_desc, urdf_file = generate_robot_model(pkg_kohm_description)
 
     # Nodes
     ign_gazebo = IncludeLaunchDescription(
@@ -51,8 +41,6 @@ def generate_launch_description():
             '/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU',
             '/camera@sensor_msgs/msg/Image[ignition.msgs.Image',
             '/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo'
-            #Pull joint states from ignition because the ros2 joint state pub node isnt working for me
-            #'/world/kohms_world/model/kohm/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model'
         ],
         output='screen',
         remappings=[
@@ -64,8 +52,8 @@ def generate_launch_description():
             ('/lidar/points', '/kohm/raw_points'),
             ('/imu', '/kohm/imu'),
             ('/camera', '/kohm/image_raw'),
-            ('/camera_info', '/kohm/camera_info')
-            #('/world/kohms_world/model/kohm/joint_state', 'joint_states')
+            ('/camera_info', '/kohm/camera_info'),
+            ('/model/kohm/joint_state', 'joint_states')
         ])
         
         #('/model/kohm/joint_state', 'joint_states'),

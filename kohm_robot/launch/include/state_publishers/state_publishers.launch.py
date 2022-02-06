@@ -11,7 +11,7 @@ from launch_ros.actions import Node
 
 def generate_robot_model(pkg_description):
     urdf_dir = os.path.join(pkg_description, 'urdf')
-    urdf_file = os.path.join(urdf_dir, 'kohm.urdf')
+    urdf_file = os.path.join(urdf_dir, 'kohm_robot.urdf')
     with open(urdf_file, 'r') as infp:
         robot_desc = infp.read()
     return robot_desc, urdf_file

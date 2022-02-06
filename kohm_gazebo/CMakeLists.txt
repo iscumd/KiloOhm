@@ -17,6 +17,15 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(kohm_description REQUIRED)
+# find_package(joint_state_publisher REQUIRED) # this errors out on foxy for some reason? not necessary to run :shrug:
+find_package(robot_state_publisher REQUIRED)
+find_package(lidar_processor REQUIRED)
+find_package(ros_ign_gazebo REQUIRED)
+find_package(ros_ign_bridge REQUIRED)
+find_package(joy REQUIRED)
+find_package(teleop_twist_joy REQUIRED)
+find_package(robot_state_controller REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
