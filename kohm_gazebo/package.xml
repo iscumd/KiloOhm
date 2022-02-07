@@ -3,8 +3,12 @@
 <package format="3">
   <name>kohm_gazebo</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="jkrasan@umich.edu">jordan</maintainer>
+  <description>Kohm is a friendly autonomous robot. This package is for the Kohm robot.</description>
+  <maintainer email="isc-robotics@umich.edu">Intelligent Systems Club</maintainer>
+  <maintainer email="dcutting@umich.edu">David Cutting</maintainer>
+  <maintainer email="agirven@umich.edu">Avery Girven</maintainer>
+  <maintainer email="avealov@umich.edu">Andy Ealovega</maintainer>
+  <maintainer email="jkrasan@umich.edu">Jordan Krasan</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>

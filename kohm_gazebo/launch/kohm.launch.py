@@ -20,7 +20,7 @@ def generate_launch_description():
                               'xbone.config.yaml')
 
     # Launch arguments
-    drive_mode_switch_button = LaunchConfiguration('drive_mode_switch_button', default='8')
+    drive_mode_switch_button = LaunchConfiguration('drive_mode_switch_button', default='7')
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
     follow_waypoints = LaunchConfiguration('follow_waypoints', default='false')
@@ -132,7 +132,7 @@ def generate_launch_description():
         # Launch Arguments
         DeclareLaunchArgument(
             'drive_mode_switch_button',
-            default_value='8',
+            default_value='7',
             description='Which button is used on the joystick to switch drive mode. (In joy message)'
         ),
         DeclareLaunchArgument(
@@ -151,10 +151,12 @@ def generate_launch_description():
         ign_gazebo,
         joy_with_teleop_twist,
         lidar_processor,
+        
         sensor_processor,
         pointcloud_to_laserscan,
         navigation,
         rviz,
+        
         waypoint_publisher,
         robot_state_controller,
         white_line_detection
