@@ -13,15 +13,24 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <exec_depend>kohm_description</exec_depend>
   <exec_depend>ros2_ouster</exec_depend> 
-  <exec_depend>lidar_processor</exec_depend>
   <exec_depend>isc_roboteq</exec_depend>        
   <exec_depend>realsense2_camera</exec_depend>
+
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>teleop_twist_joy</exec_depend>
+  <exec_depend>joy</exec_depend>
   <depend>robot_state_controller</depend>
-  <test_depend>ament_lint_auto</test_depend>
+  <exec_depend>slam_toolbox</exec_depend>
+  <exec_depend>navigation2</exec_depend>
+  <exec_depend>nav2-bringup</exec_depend>
+  <exec_depend>kohm_description</exec_depend>
+  <exec_depend>lidar_processor</exec_depend>
+  <exec_depend>white_line_detection</exec_depend>
 
   <test_depend>ament_lint_common</test_depend>
+  <test_depend>ament_lint_auto</test_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
