@@ -285,8 +285,8 @@ waypoint_follower:
       
 ouster_driver:
   ros__parameters:
-    lidar_ip: 192.168.1.3
-    computer_ip: 192.168.1.4
+    lidar_ip: 192.168.1.132
+    computer_ip: 192.168.1.141
     lidar_mode: "512x10"
     imu_port: 7503
     lidar_port: 7502

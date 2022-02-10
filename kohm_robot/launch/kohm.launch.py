@@ -168,6 +168,6 @@ def generate_launch_description():
         navigation,
         rviz,
         
-        waypoint_publisher,
+        #waypoint_publisher,
         robot_state_controller,
     ])

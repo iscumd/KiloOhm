@@ -38,7 +38,7 @@ def generate_launch_description():
         name='lidar_processor',
         output='screen',
         remappings=[
-            ('/lidar/raw_points', '/kohm/raw_points'),
+            ('/lidar/raw_points', '/points'),
             ('/lidar/filtered_points', '/kohm/filtered_points'),
             ('/lidar/unfiltered_points', '/kohm/unfiltered_points'),
             ('/lidar/raw_scan', '/kohm/raw_scan'),
