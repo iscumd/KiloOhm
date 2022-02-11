@@ -71,7 +71,7 @@
           </geometry>
           <material>
             <ambient>0.8 0.8 0.8 1</ambient>
-            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <diffuse>0 0 0 1</diffuse>
             <specular>0.8 0.8 0.8 1</specular>
           </material>
         </visual>
