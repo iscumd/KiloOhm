@@ -47,7 +47,7 @@ def generate_launch_description():
     pointcloud_to_laserscan = Node(package='pointcloud_to_laserscan',
                                    executable='pointcloud_to_laserscan_node',
                                    remappings=[('cloud_in',
-                                                '/kohm/filtered_points'),
+                                                '/kohm/combined_points'),
                                                ('scan', '/scan')],
                                    parameters=[{
                                        'laserscan_config': laserscan_config,
