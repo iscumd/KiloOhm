@@ -50,6 +50,11 @@ def generate_launch_description():
         executable='pointcloud',
         name='PointCloud_Concatenate',
         output='screen',
+        remappings=[
+            ('/lidar/points', '/kohm/filtered_points'),
+            ('/camera/points', '/kohm/camera_points'),
+            ('/combined/points', '/kohm/combined_points'),
+        ],
         parameters=[{
             'use_sim_time': use_sim_time
         }])
