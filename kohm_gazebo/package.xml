@@ -19,7 +19,7 @@
   <exec_depend>ros_ign_bridge</exec_depend>
   <exec_depend>teleop_twist_joy</exec_depend>
   <exec_depend>joy</exec_depend>
-  <depend>robot_state_controller</depend>
+  <exec_depend>robot_state_controller</exec_depend>
   <exec_depend>slam_toolbox</exec_depend>
   <exec_depend>navigation2</exec_depend>
   <exec_depend>nav2-bringup</exec_depend>
@@ -27,6 +27,7 @@
   <exec_depend>lidar_processor</exec_depend>
   <exec_depend>white_line_detection</exec_depend>
   <exec_depend>sensor_processor</exec_depend>
+  <exec_depend>waypoint</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

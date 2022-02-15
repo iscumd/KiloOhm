@@ -31,32 +31,31 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
 
-
 def generate_launch_description():
     # ROS packages
-    pkg_mammoth_snowplow = get_package_share_directory('kohm_robot')
+    pkg_kohm_robot = get_package_share_directory('kohm_robot')
     pkg_robot_state_controller = get_package_share_directory('robot_state_controller')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
 
     # Config
-    joy_config = os.path.join(pkg_mammoth_snowplow, 'config/joystick',
+    joy_config = os.path.join(pkg_kohm_robot, 'config/joystick',
                               'xbone.config.yaml')
 
     # Launch arguments
     drive_mode_switch_button = LaunchConfiguration('drive_mode_switch_button', default='7')
-    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
     follow_waypoints = LaunchConfiguration('follow_waypoints', default='false')
-
-    # Nodes
+    
+    
     state_publishers = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            os.path.join(pkg_mammoth_snowplow, 'launch'),
+            os.path.join(pkg_kohm_robot, 'launch'),
             '/include/state_publishers/state_publishers.launch.py'
         ]),
         launch_arguments={'use_sim_time': use_sim_time}.items(),
-    )
-
+    )    
+    
     joy_with_teleop_twist = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_teleop_twist_joy, 'launch', 'teleop-launch.py')),
@@ -66,50 +65,11 @@ def generate_launch_description():
             'config_filepath': joy_config
         }.items(),
     )
-
-    roboteq = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            os.path.join(pkg_mammoth_snowplow, 'launch'),
-            '/include/roboteq/roboteq.launch.py'
-        ]),
-        launch_arguments={'use_sim_time': use_sim_time}.items(),
-    )
-
-    realsense = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            os.path.join(pkg_mammoth_snowplow, 'launch'),
-            '/include/realsense/rs_t265_launch.py'
-        ]),
-        launch_arguments={'use_sim_time': use_sim_time}.items(),
-    )
-
-    lidar_processor = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            os.path.join(pkg_mammoth_snowplow, 'launch'),
-            '/include/lidar_processor/lidar_processor.launch.py'
-        ]),
-        launch_arguments={'use_sim_time': use_sim_time}.items(),
-    )
-
-    pointcloud_to_laserscan = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            os.path.join(pkg_mammoth_snowplow, 'launch'),
-            '/include/pointcloud_to_laserscan/pointcloud_to_laserscan.launch.py'
-        ]),
-        launch_arguments={'use_sim_time': use_sim_time}.items(),
-    )
-
-    navigation = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            os.path.join(pkg_mammoth_snowplow, 'launch'),
-            '/include/navigation/navigation.launch.py'
-        ]),
-        launch_arguments={'use_sim_time': use_sim_time}.items(),
-    )
-
+        
+        
     rviz = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            os.path.join(pkg_mammoth_snowplow, 'launch'),
+            os.path.join(pkg_kohm_robot, 'launch'),
             '/include/rviz/rviz.launch.py'
         ]),
         launch_arguments={
@@ -118,9 +78,41 @@ def generate_launch_description():
         }.items(),
     )
 
+    lidar_processor = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch'),
+            '/include/lidar_processor/lidar_processor.launch.py'
+        ]),
+        launch_arguments={'use_sim_time': use_sim_time}.items(),
+    )
+    
+    sensor_processor = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch'),
+            '/include/sensor_processor/sensor_processor.launch.py'
+        ]),
+        launch_arguments={'use_sim_time': use_sim_time}.items(),
+    )
+
+    pointcloud_to_laserscan = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch'),
+            '/include/pointcloud_to_laserscan/pointcloud_to_laserscan.launch.py'
+        ]),
+        launch_arguments={'use_sim_time': use_sim_time}.items(),
+    )
+
+    navigation = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch'),
+            '/include/navigation/navigation.launch.py'
+        ]),
+        launch_arguments={'use_sim_time': use_sim_time}.items(),
+    )
+
     waypoint_publisher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            os.path.join(pkg_mammoth_snowplow, 'launch'),
+            os.path.join(pkg_kohm_robot, 'launch'),
             '/include/waypoint_publisher/waypoint.launch.py'
         ]),
         launch_arguments={
@@ -131,15 +123,25 @@ def generate_launch_description():
 
     robot_state_controller = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            os.path.join(pkg_robot_state_controller, 'launch/'),
-            'rsc_with_ipp.launch.py'
+            os.path.join(pkg_robot_state_controller, 'launch'),
+            '/rsc_with_ipp.launch.py'
         ]),
         launch_arguments={
-            'use_sim_time': use_sim_time,
-            'switch_button': drive_mode_switch_button
+            'switch_button': drive_mode_switch_button,
+            'use_sim_time': use_sim_time
         }.items(),
     )
 
+    white_line_detection = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch/include/white_line_detection'),
+            '/white_line_detection.launch.py'
+        ]),
+        launch_arguments={
+            'use_sim_time': use_sim_time
+        }.items(),
+    )
+    
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument(
@@ -147,9 +149,10 @@ def generate_launch_description():
             default_value='7',
             description='Which button is used on the joystick to switch drive mode. (In joy message)'
         ),
-        DeclareLaunchArgument('use_sim_time',
-                              default_value='false',
-                              description='Use simulation clock if true'),
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value='true',
+            description='Use simulation (Gazebo) clock if true'),
         DeclareLaunchArgument('use_rviz',
                               default_value='true',
                               description='Open rviz if true'),
@@ -160,14 +163,14 @@ def generate_launch_description():
         # Nodes
         state_publishers,
         joy_with_teleop_twist,
-        roboteq,
-        realsense,
-        
         lidar_processor,
+        
+        sensor_processor,
         pointcloud_to_laserscan,
         navigation,
         rviz,
         
-        #waypoint_publisher,
+        waypoint_publisher,
         robot_state_controller,
+        white_line_detection
     ])

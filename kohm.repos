@@ -2,7 +2,7 @@ repositories:
   KiloOhm:
     type: git
     url: https://github.com/iscumd/KiloOhm
-    version: master
+    version: galactic
   lidar_processor:
     type: git
     url: https://github.com/dcutting133/lidar_processor.git
@@ -38,5 +38,5 @@ repositories:
   white_line_detection:
     type: git
     url: https://github.com/iscumd/white_line_detection.git
-    version: master
+    version: main
 

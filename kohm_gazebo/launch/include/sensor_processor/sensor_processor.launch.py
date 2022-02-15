@@ -45,6 +45,20 @@ def generate_launch_description():
             'use_sim_time': use_sim_time
         }])
 
+    cloud_concat = Node(
+        package='sensor_processor',
+        executable='pointcloud',
+        name='PointCloud_Concatenate',
+        output='screen',
+        remappings=[
+            ('/lidar/points', '/kohm/filtered_points'),
+            ('/camera/points', '/kohm/camera_points'),
+            ('/combined/points', '/kohm/combined_points'),
+        ],
+        parameters=[{
+            'use_sim_time': use_sim_time
+        }])
+
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time',
@@ -53,4 +67,5 @@ def generate_launch_description():
 
         # Nodes
         sensor_processor,
+        cloud_concat
     ])
