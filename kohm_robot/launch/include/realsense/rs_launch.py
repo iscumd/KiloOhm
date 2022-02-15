@@ -438,7 +438,9 @@ def generate_launch_description():
                         set_configurable_parameters(configurable_parameters)
                     ],
                     remappings=[
-                        ('/camera/odom/sample', '/kohm/odom'),
+                        ('/camera/color/camera_info', '/kohm/camera_info'),
+                        ('/camera/color/image_raw', '/kohm/image_raw'),
+                        ('/camera/odom/sample', '/kohm/odom'),   
                     ],
                     output='screen',
                     arguments=[
@@ -460,7 +462,9 @@ def generate_launch_description():
                         PythonExpression([LaunchConfiguration("config_file")])
                     ],
                     remappings=[
-                        ('/camera/odom/sample', '/kohm/odom'),
+                        ('/camera/color/camera_info', '/kohm/camera_info'),
+                        ('/camera/color/image_raw', '/kohm/image_raw'),
+                        ('/camera/odom/sample', '/kohm/odom'),                          
                     ],
                     output='screen',
                     arguments=[
