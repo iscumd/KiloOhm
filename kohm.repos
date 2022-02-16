@@ -2,7 +2,7 @@ repositories:
   KiloOhm:
     type: git
     url: https://github.com/iscumd/KiloOhm
-    version: galactic
+    version: master
   lidar_processor:
     type: git
     url: https://github.com/dcutting133/lidar_processor.git
