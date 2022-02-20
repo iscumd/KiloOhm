@@ -23,7 +23,7 @@ def generate_launch_description():
             os.path.join(pkg_ros_ign_gazebo, 'launch',
                          'ign_gazebo.launch.py')),
         launch_arguments={
-            'ign_args': '-r ' + pkg_kohm_gazebo + '/worlds/kohms_world.sdf'
+            'ign_args': '-r ' + pkg_kohm_gazebo + '/worlds/kohms_world_shapes.sdf'
         }.items(),
     )
 
