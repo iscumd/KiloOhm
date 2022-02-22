@@ -401,13 +401,6 @@
                 iyy="5.4e-05" iyz="0.0"
                 izz="0.000108"/>
         </inertial>
-        <sensor name="imu_sensor" type="imu">
-            <always_on>1</always_on>
-            <update_rate>1</update_rate>
-            <visualize>true</visualize>
-            <topic>imu</topic>
-            <enable_metrics>true</enable_metrics>
-        </sensor>
     </link>
     
     <joint name="imu_link_to_base_link" type="fixed">
@@ -518,6 +511,20 @@
     </sensor>
   </gazebo>
   
+  <gazebo reference="imu_link">
+    <sensor name="navsat" type="navsat">
+        <always_on>1</always_on>
+        <update_rate>1</update_rate>
+        <topic>navsat</topic>
+    </sensor>
+    <sensor name="imu_sensor" type="imu">
+        <always_on>1</always_on>
+        <update_rate>1</update_rate>
+        <visualize>true</visualize>
+        <topic>imu</topic>
+        <enable_metrics>true</enable_metrics>
+    </sensor>
+  </gazebo>
 <!--Gets joint states from gazebo model so that they can be sent to ros2 over ign_bridge
   <gazebo>
     <plugin filename="libignition-gazebo-joint-state-publisher-system.so" name="ignition::gazebo::systems::JointStatePublisher"/>
