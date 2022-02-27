@@ -3,6 +3,9 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
+from launch.substitutions import LaunchConfiguration
+from launch.actions import DeclareLaunchArgument
+import launch.substitutions
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
@@ -16,6 +19,8 @@ def generate_launch_description():
     pkg_kohm_gazebo = get_package_share_directory('kohm_gazebo')
     pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
 
+    gazebo_world = LaunchConfiguration(
+        'gazebo_world', default='kohms_world_shapes.sdf')
 
     # Nodes
     ign_gazebo = IncludeLaunchDescription(
@@ -23,8 +28,8 @@ def generate_launch_description():
             os.path.join(pkg_ros_ign_gazebo, 'launch',
                          'ign_gazebo.launch.py')),
         launch_arguments={
-            'ign_args': '-r ' + pkg_kohm_gazebo + '/worlds/kohms_world_shapes.sdf'
-        }.items(),
+            'ign_args': launch.substitutions.PathJoinSubstitution([pkg_kohm_gazebo + '/worlds/', gazebo_world])
+        }.items()
     )
 
     ign_bridge = Node(
@@ -55,8 +60,8 @@ def generate_launch_description():
             ('/camera_info', '/kohm/camera_info'),
             ('/model/kohm/joint_state', 'joint_states')
         ])
-        
-        #('/model/kohm/joint_state', 'joint_states'),
+
+    #('/model/kohm/joint_state', 'joint_states'),
     ign_spawn_robot = Node(package='ros_ign_gazebo',
                            executable='create',
                            arguments=[
@@ -70,4 +75,8 @@ def generate_launch_description():
         ign_gazebo,
         ign_bridge,
         ign_spawn_robot,
+
+        DeclareLaunchArgument('gazebo_world',
+                              default_value='kohms_word_shapes.sdf',
+                              description='gazebo world to load'),
     ])
