@@ -66,7 +66,6 @@ def generate_launch_description():
         }.items(),
     )
         
-        
     rviz = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch'),
@@ -142,6 +141,16 @@ def generate_launch_description():
         }.items(),
     )
     
+    vectornav = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch/include/vectornav'),
+            '/vectornav.launch.py'
+        ]),
+        launch_arguments={
+            'use_sim_time': use_sim_time
+        }.items(),
+    )
+    
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument(
@@ -172,5 +181,7 @@ def generate_launch_description():
         
         waypoint_publisher,
         robot_state_controller,
-        white_line_detection
+        white_line_detection,
+
+        vectornav,
     ])
