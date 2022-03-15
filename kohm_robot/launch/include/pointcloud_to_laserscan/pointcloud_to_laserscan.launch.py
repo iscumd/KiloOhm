@@ -41,7 +41,7 @@ def generate_launch_description():
                                     'pointcloud_to_laserscan.yaml')
 
     # Launch arguments
-    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
     # Nodes
     pointcloud_to_laserscan = Node(package='pointcloud_to_laserscan',
@@ -58,7 +58,7 @@ def generate_launch_description():
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time',
-                              default_value='true',
+                              default_value='false',
                               description='Use simulation time if true'),
         # Nodes
         pointcloud_to_laserscan,

@@ -42,7 +42,7 @@ def generate_launch_description():
                               'vectornav.yaml')
 
     # Launch arguments
-    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
     param_substitutions = {
         'use_sim_time': use_sim_time,
@@ -71,7 +71,7 @@ def generate_launch_description():
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time',
-                              default_value='true',
+                              default_value='false',
                               description='Use simulation time if true'),
         # Nodes
         start_vectornav_cmd,

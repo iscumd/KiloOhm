@@ -23,7 +23,7 @@ def generate_launch_description():
         'kohm_description')
 
     # Launch arguments
-    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     robot_desc, urdf_file = generate_robot_model(pkg_kohm_description)
 
     # Nodes
@@ -46,7 +46,7 @@ def generate_launch_description():
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time',
-                              default_value='true',
+                              default_value='false',
                               description='Use simulation clock if true'),
 
         # Nodes
