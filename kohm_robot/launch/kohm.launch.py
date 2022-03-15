@@ -151,6 +151,16 @@ def generate_launch_description():
         }.items(),
     )
     
+    realsense = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch/include/realsense'),
+            '/rs_launch.py'
+        ]),
+        launch_arguments={
+            'use_sim_time': use_sim_time
+        }.items(),
+    )
+    
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument(
@@ -160,10 +170,10 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             'use_sim_time',
-            default_value='true',
+            default_value='false',
             description='Use simulation (Gazebo) clock if true'),
         DeclareLaunchArgument('use_rviz',
-                              default_value='true',
+                              default_value='false',
                               description='Open rviz if true'),
         DeclareLaunchArgument('follow_waypoints',
                               default_value='false',
@@ -176,12 +186,13 @@ def generate_launch_description():
         
         sensor_processor,
         pointcloud_to_laserscan,
-        navigation,
+        #navigation,
         rviz,
         
         waypoint_publisher,
         robot_state_controller,
         white_line_detection,
 
-        vectornav,
+        #vectornav,
+        realsense
     ])
