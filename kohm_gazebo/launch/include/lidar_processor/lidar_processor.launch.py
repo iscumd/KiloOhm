@@ -34,7 +34,7 @@ def generate_launch_description():
 
     pcpl = Node(
         package='pcpl',
-        executable='lidar_processor',
+        executable='pcpl',
         name='pcpl',
         output='screen',
         remappings=[
