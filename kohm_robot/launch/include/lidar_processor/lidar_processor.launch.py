@@ -32,10 +32,10 @@ def generate_launch_description():
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
 
-    lidar_processor = Node(
-        package='lidar_processor',
+    pcpl = Node(
+        package='pcpl',
         executable='lidar_processor',
-        name='lidar_processor',
+        name='pcpl',
         output='screen',
         remappings=[
             ('/lidar/raw_points', '/points'),
@@ -56,5 +56,5 @@ def generate_launch_description():
                               description='Use simulation clock if true'),
 
         # Nodes
-        lidar_processor,
+        pcpl,
     ])

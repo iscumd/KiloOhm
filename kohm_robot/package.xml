@@ -26,7 +26,7 @@
   <exec_depend>navigation2</exec_depend>
   <exec_depend>nav2-bringup</exec_depend>
   <exec_depend>kohm_description</exec_depend>
-  <exec_depend>lidar_processor</exec_depend>
+  <exec_depend>pcpl</exec_depend>
   <exec_depend>white_line_detection</exec_depend>
   <exec_depend>vectornav</exec_depend>
 
