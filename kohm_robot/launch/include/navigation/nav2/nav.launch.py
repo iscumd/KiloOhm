@@ -36,7 +36,7 @@ def generate_launch_description():
         'map_subscribe_transient_local')
 
     lifecycle_nodes = [
-        'ouster_driver', 'controller_server', 'planner_server', 'recoveries_server',
+        'controller_server', 'planner_server', 'recoveries_server',
         'bt_navigator', 'waypoint_follower'
     ]
 

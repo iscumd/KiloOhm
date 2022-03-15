@@ -43,7 +43,7 @@ def generate_launch_description():
 
     # Launch arguments
     drive_mode_switch_button = LaunchConfiguration('drive_mode_switch_button', default='7')
-    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
     follow_waypoints = LaunchConfiguration('follow_waypoints', default='false')
     
@@ -154,7 +154,7 @@ def generate_launch_description():
     realsense = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch/include/realsense'),
-            '/rs_launch.py'
+            '/rs_combined.launch.py'
         ]),
         launch_arguments={
             'use_sim_time': use_sim_time
@@ -186,7 +186,7 @@ def generate_launch_description():
         
         sensor_processor,
         pointcloud_to_laserscan,
-        #navigation,
+        navigation,
         rviz,
         
         waypoint_publisher,
