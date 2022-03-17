@@ -65,7 +65,7 @@ def generate_launch_description():
         package='vectornav',
         executable='vn_sensor_msgs',
         output='screen',
-        remappings=[('/vectornav/imu', '/kohm/gps/imu')],
+        remappings=[('/vectornav/imu', '/kohm/gps/imu'), ('vectornav/gnss', '/kohm/navsat')],
         parameters=[configured_params])
 
     return LaunchDescription([
