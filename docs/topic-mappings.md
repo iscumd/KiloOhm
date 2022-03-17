@@ -9,6 +9,9 @@ TODO very wip
 - `/kohm/gps/imu`: vectornav imu data
 TODO lidar and realsense
 
+### GPS topics
+- `/kohm/navsat`: vectornav gps location
+
 ### Image topics
 - `/kohm/camera_info`: Camera calibration from realsense
 - `/kohm/image_raw`: images from realsense
@@ -16,4 +19,5 @@ TODO lidar and realsense
 ### Point topics
 - `/kohm/camera_points`: Points from WLD
 - `/kohm/filtered_points`: filtered points from lidar proc
+- `/kohm/combined_points`: the combined points of camera and filtered points
 - `/scan`: the scan output from pc-ls
