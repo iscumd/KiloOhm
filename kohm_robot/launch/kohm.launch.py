@@ -35,17 +35,27 @@ def generate_launch_description():
     # ROS packages
     pkg_kohm_robot = get_package_share_directory('kohm_robot')
     pkg_robot_state_controller = get_package_share_directory('robot_state_controller')
+    pkg_ouster_driver = get_package_share_directory('ros2_ouster')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
 
     # Config
     joy_config = os.path.join(pkg_kohm_robot, 'config/joystick',
-                              'xbone.config.yaml')
+                              'wii-wheel.config.yaml')
 
     # Launch arguments
     drive_mode_switch_button = LaunchConfiguration('drive_mode_switch_button', default='7')
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
     follow_waypoints = LaunchConfiguration('follow_waypoints', default='false')
+    
+    
+    roboteq = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch'),
+            '/include/roboteq/roboteq.launch.py'
+        ]),
+        launch_arguments={'use_sim_time': use_sim_time}.items(),
+    ) 
     
     
     state_publishers = IncludeLaunchDescription(
@@ -150,7 +160,7 @@ def generate_launch_description():
             'use_sim_time': use_sim_time
         }.items(),
     )
-    
+        
     realsense = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch/include/realsense'),
@@ -165,7 +175,7 @@ def generate_launch_description():
         # Launch Arguments
         DeclareLaunchArgument(
             'drive_mode_switch_button',
-            default_value='7',
+            default_value='10',
             description='Which button is used on the joystick to switch drive mode. (In joy message)'
         ),
         DeclareLaunchArgument(
@@ -173,7 +183,7 @@ def generate_launch_description():
             default_value='false',
             description='Use simulation (Gazebo) clock if true'),
         DeclareLaunchArgument('use_rviz',
-                              default_value='false',
+                              default_value='true',
                               description='Open rviz if true'),
         DeclareLaunchArgument('follow_waypoints',
                               default_value='false',
@@ -186,8 +196,9 @@ def generate_launch_description():
         
         sensor_processor,
         pointcloud_to_laserscan,
-        navigation,
+        #navigation,
         rviz,
+        roboteq,
         
         waypoint_publisher,
         robot_state_controller,

@@ -36,12 +36,13 @@ def generate_launch_description():
         'map_subscribe_transient_local')
 
     lifecycle_nodes = [
-        'ouster_drive','controller_server', 'planner_server', 'recoveries_server',
+        'controller_server', 'planner_server', 'recoveries_server',
         'bt_navigator', 'waypoint_follower'
     ]
 
     remappings = [('/tf', 'tf'), ('/tf_static', 'tf_static'), ('/cmd_vel', '/nav_vel'), ('/odom', '/kohm/odom')]
-
+    
+   
     param_substitutions = {
         'use_sim_time': use_sim_time,
         'default_bt_xml_filename': default_bt_xml_filename,
@@ -83,13 +84,6 @@ def generate_launch_description():
             'map_subscribe_transient_local',
             default_value='false',
             description='Whether to set the map subscriber QoS to transient local'),
-        Node(
-             package='ros2_ouster',
-             executable='ouster_driver',
-             name='ouster_driver',
-             output='screen',
-             emulate_tty=True,
-             parameters=[configured_params]),
         Node(package='nav2_controller',
              executable='controller_server',
              output='screen',
