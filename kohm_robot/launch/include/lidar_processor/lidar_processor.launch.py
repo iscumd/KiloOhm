@@ -30,12 +30,12 @@ from launch_ros.actions import Node
 def generate_launch_description():
 
     # Launch arguments
-    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
-    lidar_processor = Node(
-        package='lidar_processor',
-        executable='lidar_processor',
-        name='lidar_processor',
+    pcpl = Node(
+        package='pcpl',
+        executable='pcpl',
+        name='pcpl',
         output='screen',
         remappings=[
             ('/lidar/raw_points', '/points'),
@@ -52,9 +52,9 @@ def generate_launch_description():
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time',
-                              default_value='true',
+                              default_value='false',
                               description='Use simulation clock if true'),
 
         # Nodes
-        lidar_processor,
+        pcpl,
     ])

@@ -27,6 +27,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
+from nav2_common.launch import RewrittenYaml
 
 from launch_ros.actions import Node
 
@@ -36,24 +37,36 @@ def generate_launch_description():
     pkg_kohm_gazebo = get_package_share_directory('kohm_robot')
 
     # Config
-    laserscan_config = os.path.join(pkg_kohm_gazebo,
-                                    'config/pointcloud_to_laserscan',
-                                    'pointcloud_to_laserscan.yaml')
+    vn300_conf = os.path.join(pkg_kohm_gazebo,
+                              'config/vectornav',
+                              'vectornav.yaml')
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
-    # Nodes
-    pointcloud_to_laserscan = Node(package='pointcloud_to_laserscan',
-                                   executable='pointcloud_to_laserscan_node',
-                                   remappings=[('cloud_in',
-                                                '/kohm/filtered_points'),
-                                               ('scan', '/scan')],
-                                   parameters=[{
-                                       'laserscan_config': laserscan_config,
-                                       'use_sim_time': use_sim_time,
-                                   }],
-                                   name='pointcloud_to_laserscan')
+    param_substitutions = {
+        'use_sim_time': use_sim_time,
+    } #TODO add usb port to these params later
+
+    configured_params = RewrittenYaml(source_file=vn300_conf,
+                                      root_key='',
+                                      param_rewrites=param_substitutions,
+                                      convert_types=True)
+
+    # Vectornav
+    start_vectornav_cmd = Node(
+        package='vectornav',
+        executable='vectornav',
+        output='screen',
+        parameters=[configured_params])
+    
+    # Node that converts raw vectornav data to ros msgs
+    start_vectornav_sensor_msgs_cmd = Node( 
+        package='vectornav',
+        executable='vn_sensor_msgs',
+        output='screen',
+        remappings=[('/vectornav/imu', '/kohm/gps/imu'), ('vectornav/gnss', '/kohm/navsat')],
+        parameters=[configured_params])
 
     return LaunchDescription([
         # Launch Arguments
@@ -61,5 +74,6 @@ def generate_launch_description():
                               default_value='false',
                               description='Use simulation time if true'),
         # Nodes
-        pointcloud_to_laserscan,
+        start_vectornav_cmd,
+        start_vectornav_sensor_msgs_cmd
     ])

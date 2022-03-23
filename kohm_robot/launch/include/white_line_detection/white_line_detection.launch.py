@@ -38,7 +38,7 @@ def generate_launch_description():
     white_line_params_file = LaunchConfiguration('white_line_params_file',
                                            default=white_lines_params_file_path)
     # Launch arguments
-    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
 
     white_line_detection = Node(
@@ -48,7 +48,7 @@ def generate_launch_description():
         output='screen',
         remappings=[
             ('/camera/camera_points', '/kohm/camera_points'),
-            ('/camera/image_raw', '/kohm/unfiltered_image_raw'),
+            ('/camera/image_raw', '/kohm/image_raw'),
             ('/camera/camera_info', '/kohm/camera_info')
         ],
         parameters=[
@@ -62,7 +62,7 @@ def generate_launch_description():
                               default_value=white_lines_params_file_path,
                               description='The file path of the params file for White Line Detection'),
         DeclareLaunchArgument('use_sim_time',
-                              default_value='true',
+                              default_value='false',
                               description='Use simulation clock if true'),
 
         # Nodes

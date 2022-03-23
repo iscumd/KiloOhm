@@ -16,7 +16,7 @@ def generate_launch_description():
         'kohm_description')
 
     # launch arguments
-    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
 
     # Nodes
@@ -35,7 +35,7 @@ def generate_launch_description():
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_rviz',
-                              default_value='false',
+                              default_value='true',
                               description='Use simulation time if true'),
 
         # Node

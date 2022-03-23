@@ -7,7 +7,7 @@
   <maintainer email="isc-robotics@umich.edu">Intelligent Systems Club</maintainer>
   <maintainer email="dcutting@umich.edu">David Cutting</maintainer>
   <maintainer email="agirven@umich.edu">Avery Girven</maintainer>
-  <maintainer email="avealov@umich.edu">Andy Ealovega</maintainer>
+  <maintainer email="avealov@umich.edu">Andrew Ealovega</maintainer>
   <maintainer email="jkrasan@umich.edu">Jordan Krasan</maintainer>
   <license>MIT</license>
 
@@ -26,8 +26,9 @@
   <exec_depend>navigation2</exec_depend>
   <exec_depend>nav2-bringup</exec_depend>
   <exec_depend>kohm_description</exec_depend>
-  <exec_depend>lidar_processor</exec_depend>
+  <exec_depend>pcpl</exec_depend>
   <exec_depend>white_line_detection</exec_depend>
+  <exec_depend>vectornav</exec_depend>
 
   <test_depend>ament_lint_common</test_depend>
   <test_depend>ament_lint_auto</test_depend>

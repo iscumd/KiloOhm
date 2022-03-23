@@ -1,7 +1,7 @@
 repositories:
-  lidar_processor:
+  pcpl:
     type: git
-    url: https://github.com/dcutting133/lidar_processor.git
+    url: https://github.com/davidcutting/pcpl.git
     version: master
   isc_roboteq:
     type: git
@@ -34,4 +34,12 @@ repositories:
   white_line_detection:
     type: git
     url: https://github.com/iscumd/white_line_detection.git
-    version: main
+    version: dynamic-thresh
+  navigation2:
+    type: git
+    url: https://github.com/andyblarblar/navigation2.git
+    version: isc_fix
+  vectornav:
+    type: git
+    url: https://github.com/dawonn/vectornav.git
+    version: ros2

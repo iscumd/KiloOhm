@@ -1,6 +1,6 @@
 amcl:
   ros__parameters:
-    use_sim_time: True
+    use_sim_time: False
     alpha1: 0.2
     alpha2: 0.2
     alpha3: 0.2
@@ -41,15 +41,15 @@ amcl:
 
 amcl_map_client:
   ros__parameters:
-    use_sim_time: True
+    use_sim_time: False
 
 amcl_rclcpp_node:
   ros__parameters:
-    use_sim_time: True
+    use_sim_time: False
 
 bt_navigator:
   ros__parameters:
-    use_sim_time: True
+    use_sim_time: False
     global_frame: map
     robot_base_frame: base_footprint
     odom_topic: /kohm/odom
@@ -83,12 +83,12 @@ bt_navigator:
 
 bt_navigator_rclcpp_node:
   ros__parameters:
-    use_sim_time: True
+    use_sim_time: False
 
 controller_server:
   ros__parameters:
     # controller server parameters (see Controller Server for more info)
-    use_sim_time: True
+    use_sim_time: False
     controller_frequency: 20.0
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
@@ -149,7 +149,7 @@ controller_server:
       
 controller_server_rclcpp_node:
   ros__parameters:
-    use_sim_time: True
+    use_sim_time: False
 
 local_costmap:
   local_costmap:
@@ -158,7 +158,7 @@ local_costmap:
       publish_frequency: 20.0
       global_frame: odom
       robot_base_frame: base_footprint
-      use_sim_time: True
+      use_sim_time: False
       rolling_window: true
       width: 10
       height: 10
@@ -190,10 +190,10 @@ local_costmap:
       always_send_full_costmap: True
   local_costmap_client:
     ros__parameters:
-      use_sim_time: True
+      use_sim_time: False
   local_costmap_rclcpp_node:
     ros__parameters:
-      use_sim_time: True
+      use_sim_time: False
 
 global_costmap:
   global_costmap:
@@ -202,7 +202,7 @@ global_costmap:
       publish_frequency: 20.0
       global_frame: map
       robot_base_frame: base_footprint
-      use_sim_time: True
+      use_sim_time: False
       robot_radius: 0.52
       resolution: 0.05
       track_unknown_space: true
@@ -233,21 +233,21 @@ global_costmap:
       always_send_full_costmap: True
   global_costmap_client:
     ros__parameters:
-      use_sim_time: True
+      use_sim_time: False
   global_costmap_rclcpp_node:
     ros__parameters:
-      use_sim_time: True
+      use_sim_time: False
 
 map_server:
   ros__parameters:
-    use_sim_time: True
+    use_sim_time: False
     yaml_filename: "/install/mammoth_snowplow/share/mammoth_snowplow/config/maps/amcl/single-I.pgm"
     topic_name: "map"
     frame_id: "map"
 
 map_saver:
   ros__parameters:
-    use_sim_time: True
+    use_sim_time: False
     save_map_timeout: 5000
     free_thresh_default: 0.25
     occupied_thresh_default: 0.65
@@ -256,7 +256,7 @@ map_saver:
 planner_server:
   ros__parameters:
     planner_plugins: ["GridBased"]
-    use_sim_time: True
+    use_sim_time: False
 
     GridBased:
       plugin: "nav2_smac_planner/SmacPlannerHybrid"
@@ -287,7 +287,7 @@ planner_server:
 
 planner_server_rclcpp_node:
   ros__parameters:
-    use_sim_time: True
+    use_sim_time: False
 
 recoveries_server:
   ros__parameters:
@@ -304,7 +304,7 @@ recoveries_server:
     global_frame: odom
     robot_base_frame: base_footprint
     transform_timeout: 0.1
-    use_sim_time: true
+    use_sim_time: False
     simulate_ahead_time: 2.0
     max_rotational_vel: 1.0
     min_rotational_vel: 0.4
@@ -312,7 +312,7 @@ recoveries_server:
 
 robot_state_publisher:
   ros__parameters:
-    use_sim_time: True
+    use_sim_time: False
     
 waypoint_follower:
   ros__parameters:
@@ -336,4 +336,4 @@ ouster_driver:
     imu_frame: imu_link
     use_system_default_qos: False
     timestamp_mode: TIME_FROM_INTERNAL_OSC
-    os1_proc_mask: PCL|IMU
+    proc_mask: PCL|IMU 

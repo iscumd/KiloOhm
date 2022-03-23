@@ -30,9 +30,9 @@ from launch_ros.actions import Node
 def generate_launch_description():
 
     # Launch arguments
-    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
-    sensor_processor = Node(
+    sensor_processor = Node( #TODO pretty sure we can remove this for robot
         package='sensor_processor',
         executable='sensor_processor',
         name='sensor_processor',
@@ -62,7 +62,7 @@ def generate_launch_description():
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time',
-                              default_value='true',
+                              default_value='false',
                               description='Use simulation clock if true'),
 
         # Nodes

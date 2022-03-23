@@ -22,10 +22,11 @@ find_package(robot_state_publisher REQUIRED)
 find_package(joy REQUIRED)
 find_package(teleop_twist_joy REQUIRED)
 find_package(ros2_ouster REQUIRED)
-find_package(lidar_processor REQUIRED)
+find_package(pcpl REQUIRED)
 find_package(realsense2_camera REQUIRED)
 find_package(isc_roboteq REQUIRED)
 find_package(robot_state_controller REQUIRED)
+find_package(vectornav REQUIRED)
 
 # uncomment the following section in order to fill in
 # further dependencies manually.

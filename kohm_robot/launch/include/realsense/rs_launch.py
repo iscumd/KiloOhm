@@ -358,11 +358,15 @@ configurable_parameters = [
     },
     {
         'name': 'publish_tf',
-        'default': 'true',
+        'default': 'false',
         'description': 'publish tf'
     },
+    {
+        'name': 'color_optical_frame_id',
+        'default': 'camera_link',
+        'description': 'set frame id of camera'
+    },
 ]
-
 
 def declare_configurable_parameters(parameters):
     return [
@@ -438,9 +442,9 @@ def generate_launch_description():
                         set_configurable_parameters(configurable_parameters)
                     ],
                     remappings=[
-                        ('/camera/color/camera_info', '/kohm/camera_info'),
-                        ('/camera/color/image_raw', '/kohm/image_raw'),
-                        ('/camera/odom/sample', '/kohm/odom'),   
+                        ('/D435/color/camera_info', '/kohm/camera_info'),
+                        ('/D435/color/image_raw', '/kohm/image_raw'),
+                        ('/D435/odom/sample', '/kohm/odom'),  
                     ],
                     output='screen',
                     arguments=[
@@ -462,9 +466,9 @@ def generate_launch_description():
                         PythonExpression([LaunchConfiguration("config_file")])
                     ],
                     remappings=[
-                        ('/camera/color/camera_info', '/kohm/camera_info'),
-                        ('/camera/color/image_raw', '/kohm/image_raw'),
-                        ('/camera/odom/sample', '/kohm/odom'),                          
+                        ('/D435/color/camera_info', '/kohm/camera_info'),
+                        ('/D435/color/image_raw', '/kohm/image_raw'),
+                        ('/D435/odom/sample', '/kohm/odom'),                         
                     ],
                     output='screen',
                     arguments=[
