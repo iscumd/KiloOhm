@@ -38,7 +38,7 @@ repositories:
   white_line_detection:
     type: git
     url: https://github.com/iscumd/white_line_detection.git
-    version: dynamic-thresh
+    version: main
   navigation2:
     type: git
     url: https://github.com/andyblarblar/navigation2.git
