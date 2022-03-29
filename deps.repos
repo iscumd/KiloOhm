@@ -6,7 +6,11 @@ repositories:
   isc_roboteq:
     type: git
     url: https://github.com/iscumd/isc_roboteq_hdc2460.git
-    version: ros2
+    version: ros2-ohm-friendly
+  isc_sick:
+    type: git
+    url: https://github.com/iscumd/isc_sick
+    version: master
   pointcloud_to_laserscan:
     type: git
     url: https://github.com/ros-perception/pointcloud_to_laserscan.git
