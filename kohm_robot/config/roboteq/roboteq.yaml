@@ -3,3 +3,4 @@ isc_roboteq:
     Max_Current: 30.0
     Baudrate: 9600
     ChunkSize: 64 
+    has_encoders: false # Encoders are currently not working

@@ -35,7 +35,6 @@ def generate_launch_description():
     # ROS packages
     pkg_kohm_robot = get_package_share_directory('kohm_robot')
     pkg_robot_state_controller = get_package_share_directory('robot_state_controller')
-    pkg_ouster_driver = get_package_share_directory('ros2_ouster')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
 
     # Config
@@ -56,7 +55,6 @@ def generate_launch_description():
         ]),
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     ) 
-    
     
     state_publishers = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
@@ -87,13 +85,13 @@ def generate_launch_description():
         }.items(),
     )
 
-    lidar_processor = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            os.path.join(pkg_kohm_robot, 'launch'),
-            '/include/lidar_processor/lidar_processor.launch.py'
-        ]),
-        launch_arguments={'use_sim_time': use_sim_time}.items(),
-    )
+    #lidar_processor = IncludeLaunchDescription( NOTE: no longer used as we are not using a 3d lidar
+    #    PythonLaunchDescriptionSource([
+    #        os.path.join(pkg_kohm_robot, 'launch'),
+    #        '/include/lidar_processor/lidar_processor.launch.py'
+    #    ]),
+    #    launch_arguments={'use_sim_time': use_sim_time}.items(),
+    #)
     
     sensor_processor = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
@@ -170,7 +168,7 @@ def generate_launch_description():
             'use_sim_time': use_sim_time
         }.items(),
     )
-    
+
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument(
@@ -192,7 +190,6 @@ def generate_launch_description():
         # Nodes
         state_publishers,
         joy_with_teleop_twist,
-        lidar_processor,
         
         sensor_processor,
         pointcloud_to_laserscan,
@@ -205,5 +202,5 @@ def generate_launch_description():
         white_line_detection,
 
         #vectornav,
-        realsense
+        realsense,
     ])
