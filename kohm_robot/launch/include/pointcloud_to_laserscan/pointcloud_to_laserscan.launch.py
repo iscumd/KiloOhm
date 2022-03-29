@@ -55,6 +55,15 @@ def generate_launch_description():
                                    }],
                                    name='pointcloud_to_laserscan')
 
+    # NOTE: this is only used with the SICK lidar, to emulate a 3d lidar and reuse the rest of the pointcloud merging pipline.
+    laserscan_to_pointcloud = Node(
+        package='pointcloud_to_laserscan',
+        executable='laserscan_to_pointcloud_node',
+        name='laserscan_to_pointcloud',
+        remappings=[('scan_in', '/sick/scan'),
+                    ('cloud', '/kohm/filtered_points')]
+    )
+
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time',
@@ -62,4 +71,5 @@ def generate_launch_description():
                               description='Use simulation time if true'),
         # Nodes
         pointcloud_to_laserscan,
+        laserscan_to_pointcloud
     ])
