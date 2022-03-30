@@ -48,7 +48,9 @@ def generate_launch_description():
         executable='isc_roboteq',
         name='isc_roboteq',
         output='screen',
-        remappings=[('/cmd_vel','/robot/cmd_vel')],
+        remappings=[('/cmd_vel','/robot/cmd_vel'),
+        ('/robot/left_encoder_counts', '/kohm/left_encoder_counts'),
+        ('/robot/right_encoder_counts', '/kohm/right_encoder_counts')],
         parameters=[roboteq_config],
     )
 
