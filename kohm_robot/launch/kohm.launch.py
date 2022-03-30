@@ -193,7 +193,7 @@ def generate_launch_description():
         
         sensor_processor,
         pointcloud_to_laserscan,
-        #navigation,
+        navigation,
         rviz,
         roboteq,
         
