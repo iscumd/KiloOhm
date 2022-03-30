@@ -12,6 +12,10 @@ TODO very wip
 ### Odom topics 
 - `/kohm/odom`: Currently the t265's VIO
 
+### Encoder topics
+- `/kohm/left_encoder_counts`: Left encoder values
+- `/kohm/right_encoder_counts`: Right encoder values
+
 ### GPS topics
 - `/kohm/navsat`: vectornav gps location
 
