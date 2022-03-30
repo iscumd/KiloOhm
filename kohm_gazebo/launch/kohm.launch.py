@@ -67,13 +67,13 @@ def generate_launch_description():
         }.items(),
     )
 
-    lidar_processor = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            os.path.join(pkg_kohm_gazebo, 'launch'),
-            '/include/lidar_processor/lidar_processor.launch.py'
-        ]),
-        launch_arguments={'use_sim_time': use_sim_time}.items(),
-    )
+    #lidar_processor = IncludeLaunchDescription(
+    #    PythonLaunchDescriptionSource([
+    #        os.path.join(pkg_kohm_gazebo, 'launch'),
+    #        '/include/lidar_processor/lidar_processor.launch.py'
+    #    ]),
+    #    launch_arguments={'use_sim_time': use_sim_time}.items(),
+    #)
 
     sensor_processor = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
@@ -157,7 +157,6 @@ def generate_launch_description():
         state_publishers,
         ign_gazebo,
         joy_with_teleop_twist,
-        lidar_processor,
 
         sensor_processor,
         pointcloud_to_laserscan,
