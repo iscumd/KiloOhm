@@ -56,7 +56,7 @@ def generate_launch_description():
             ('/combined/points', '/kohm/combined_points'),
         ],
         parameters=[{
-            'use_sim_time': use_sim_time
+            'use_sim_time': use_sim_time,
         }])
 
     return LaunchDescription([

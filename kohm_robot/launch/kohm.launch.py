@@ -169,6 +169,16 @@ def generate_launch_description():
         }.items(),
     )
 
+    isc_sick = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch/include/isc_sick'),
+            '/isc_sick.launch.py'
+        ]),
+        launch_arguments={
+            'use_sim_time': use_sim_time
+        }.items(),
+    )
+
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument(
@@ -195,12 +205,13 @@ def generate_launch_description():
         pointcloud_to_laserscan,
         navigation,
         rviz,
-        roboteq,
-        
         waypoint_publisher,
         robot_state_controller,
         white_line_detection,
 
+        # Drivers
         #vectornav,
         realsense,
+        #roboteq,
+        isc_sick,
     ])

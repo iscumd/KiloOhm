@@ -24,39 +24,99 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 
-import launch
-import launch_ros.actions
+from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration
 
 
 def generate_launch_description():
-    joy_config = launch.substitutions.LaunchConfiguration('joy_config')
-    joy_dev = launch.substitutions.LaunchConfiguration('joy_dev')
-    config_filepath = launch.substitutions.LaunchConfiguration(
-        'config_filepath')
+    '''Launches just enough nodes to move Kohm with teleop. Requires the roboteq to be plugged in, but nothing else.'''
 
-    return launch.LaunchDescription([
-        launch.actions.DeclareLaunchArgument('joy_config',
-                                             default_value='ps3'),
-        launch.actions.DeclareLaunchArgument('joy_dev',
-                                             default_value='/dev/input/js0'),
-        launch.actions.DeclareLaunchArgument(
-            'config_filepath',
-            default_value=[
-                launch.substitutions.TextSubstitution(text=os.path.join(
-                    get_package_share_directory('teleop_twist_joy'), 'config',
-                    '')), joy_config,
-                launch.substitutions.TextSubstitution(text='.config.yaml')
-            ]),
-        launch_ros.actions.Node(package='joy',
-                                executable='joy_node',
-                                name='joy_node',
-                                parameters=[{
-                                    'dev': joy_dev,
-                                    'deadzone': 0.3,
-                                    'autorepeat_rate': 20.0,
-                                }]),
-        launch_ros.actions.Node(package='teleop_twist_joy',
-                                executable='teleop_node',
-                                name='teleop_twist_joy_node',
-                                parameters=[config_filepath]),
+    # ROS packages
+    pkg_kohm_robot = get_package_share_directory('kohm_robot')
+    pkg_robot_state_controller = get_package_share_directory('robot_state_controller')
+    pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
+
+    # Config
+    joy_config = os.path.join(pkg_kohm_robot, 'config/joystick',
+                              'wii-wheel.config.yaml')
+
+    # Launch arguments
+    drive_mode_switch_button = LaunchConfiguration('drive_mode_switch_button', default='7')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+    use_rviz = LaunchConfiguration('use_rviz', default='true')
+    
+    
+    roboteq = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch'),
+            '/include/roboteq/roboteq.launch.py'
+        ]),
+        launch_arguments={'use_sim_time': use_sim_time}.items(),
+    ) 
+    
+    state_publishers = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch'),
+            '/include/state_publishers/state_publishers.launch.py'
+        ]),
+        launch_arguments={'use_sim_time': use_sim_time}.items(),
+    )    
+    
+    joy_with_teleop_twist = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_teleop_twist_joy, 'launch', 'teleop-launch.py')),
+        launch_arguments={
+            'joy_config': 'xbox',
+            'joy_dev': '/dev/input/js0',
+            'config_filepath': joy_config
+        }.items(),
+    )
+        
+    rviz = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch'),
+            '/include/rviz/rviz.launch.py'
+        ]),
+        launch_arguments={
+            'use_rviz': use_rviz,
+            'use_sim_time': use_sim_time
+        }.items(),
+    )
+
+    robot_state_controller = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_robot_state_controller, 'launch'),
+            '/rsc_with_ipp.launch.py'
+        ]),
+        launch_arguments={
+            'switch_button': drive_mode_switch_button,
+            'use_sim_time': use_sim_time
+        }.items(),
+    )
+
+    return LaunchDescription([
+        # Launch Arguments
+        DeclareLaunchArgument(
+            'drive_mode_switch_button',
+            default_value='10',
+            description='Which button is used on the joystick to switch drive mode. (In joy message)'
+        ),
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value='false',
+            description='Use simulation (Gazebo) clock if true'),
+        DeclareLaunchArgument('use_rviz',
+                              default_value='true',
+                              description='Open rviz if true'),
+
+        # Nodes
+        state_publishers,
+        joy_with_teleop_twist,
+        
+        rviz,
+        robot_state_controller,
+        roboteq
     ])

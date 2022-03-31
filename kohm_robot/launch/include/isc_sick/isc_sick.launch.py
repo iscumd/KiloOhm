@@ -26,40 +26,43 @@ from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription
+from launch.conditions import IfCondition
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
-
 from launch_ros.actions import Node
 
 
 def generate_launch_description():
-    # ROS packages
-    pkg_kohm_gazebo = get_package_share_directory('kohm_robot')
-
-    # Config
-    laserscan_config = os.path.join(pkg_kohm_gazebo,
-                                    'config/pointcloud_to_laserscan',
-                                    'pointcloud_to_laserscan.yaml')
+    '''Launches the SICK LMS-111 driver'''
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
+    # ROS packages
+    pkg_sick = get_package_share_directory('ros2_sick')
+
+    # config
+    sensor_config = os.path.join(pkg_sick, 'config', 'sick_lms111.yaml')
     # Nodes
-    pointcloud_to_laserscan = Node(package='pointcloud_to_laserscan',
-                                   executable='pointcloud_to_laserscan_node',
-                                   remappings=[('cloud_in',
-                                                '/kohm/combined_points'),
-                                               ('scan', '/scan')],
-                                   parameters=[{
-                                       'laserscan_config': laserscan_config,
-                                       'use_sim_time': use_sim_time,
-                                   }],
-                                   name='pointcloud_to_laserscan')
+    sick_driver = Node(
+        package='ros2_sick',
+        executable='ros2_sick',
+        name='ros2_sick',
+        remappings=[
+            ('/scan', '/sick/scan'),
+            ('/points', '/kohm/filtered_points'), # To allow for easy swaps with pcpl based 3D LiDAR pipelines
+        ],
+        parameters=[sensor_config],
+        output='screen',
+    )
 
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time',
                               default_value='false',
-                              description='Use simulation time if true'),
+                              description='Use simulation clock if true'),
+
         # Nodes
-        pointcloud_to_laserscan
+        sick_driver,
     ])
