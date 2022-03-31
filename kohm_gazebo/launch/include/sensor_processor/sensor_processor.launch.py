@@ -40,6 +40,8 @@ def generate_launch_description():
         remappings=[
             ('/camera/image_raw', '/kohm/image_raw'),
             ('/camera/unfiltered_image_raw', '/kohm/unfiltered_image_raw'),
+            ('/lidar/filtered_scan', '/sick/scan'),
+            ('/camera/unfiltered_depth_image_raw', '/kohm/unfiltered_depth_img_raw'),
         ],
         parameters=[{
             'use_sim_time': use_sim_time

@@ -44,8 +44,10 @@ def generate_launch_description():
             '/lidar@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
             '/lidar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
             '/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU',
-            '/camera@sensor_msgs/msg/Image[ignition.msgs.Image',
-            '/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo'
+            '/rgbd_camera/image@sensor_msgs/msg/Image[ignition.msgs.Image',
+            '/rgbd_camera/depth_image@sensor_msgs/msg/Image[ignition.msgs.Image',
+            '/rgbd_camera/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
+            '/rgbd_camera/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
         ],
         output='screen',
         remappings=[
@@ -53,11 +55,13 @@ def generate_launch_description():
             ('/model/kohm/tf', '/tf'),
             ('/model/kohm/cmd_vel', '/robot/cmd_vel'),
             ('/model/kohm/odometry', '/kohm/odom'),
-            ('/lidar', '/kohm/raw_scan'),
+            ('/lidar', '/lidar/unfiltered_scan'),
             ('/lidar/points', '/kohm/raw_points'),
             ('/imu', '/kohm/imu'),
-            ('/camera', '/kohm/image_raw'),
-            ('/camera_info', '/kohm/camera_info'),
+            ('/rgbd_camera/image', '/kohm/image_raw'),
+            ('/rgbd_camera/depth_image', '/kohm/depth_image_raw'),
+            ('/rgbd_camera/camera_info', '/kohm/camera_info'),
+            ('/rgbd_camera/points', '/kohm/camera_depth_points'),
             ('/model/kohm/joint_state', 'joint_states')
         ])
 
