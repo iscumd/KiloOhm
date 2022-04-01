@@ -7,7 +7,6 @@ TODO very wip
 
 ### IMU topics
 - `/kohm/gps/imu`: vectornav imu data
-- `/kohm/realsense/imu`: Currently the t265's IMU
 
 ### Odom topics 
 - `/kohm/odom`: Currently the t265's VIO
@@ -25,7 +24,9 @@ TODO very wip
 
 ### Point topics
 - `/sick/scan`: Raw scans from the SICK
+
+The scan pipeline:
 - `/kohm/camera_points`: Points from WLD
-- `/kohm/filtered_points`: Points from the ls-pc conversion of /sick/scan
+- `/kohm/filtered_points`: Points from the SICK driver
 - `/kohm/combined_points`: the combined points of camera and filtered points
 - `/scan`: the scan output from pc-ls
