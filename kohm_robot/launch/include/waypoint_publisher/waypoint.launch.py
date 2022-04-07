@@ -38,7 +38,7 @@ def generate_launch_description():
 
     # Config
     waypoints = os.path.join(pkg_kohm_gazebo, 'config/waypoints',
-                             'single-I.csv')
+                             'test.csv')
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     follow_waypoints = LaunchConfiguration('follow_waypoints', default='true')

@@ -212,6 +212,6 @@ def generate_launch_description():
         # Drivers
         #vectornav,
         realsense,
-        #roboteq,
+        roboteq,
         isc_sick,
     ])
