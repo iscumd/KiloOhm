@@ -40,7 +40,7 @@ def generate_launch_description():
     waypoints = os.path.join(pkg_kohm_gazebo, 'config/waypoints',
                              'single-I.csv')
     # Launch arguments
-    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     follow_waypoints = LaunchConfiguration('follow_waypoints', default='true')
 
     # Nodes
@@ -58,7 +58,7 @@ def generate_launch_description():
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time',
-                              default_value='false',
+                              default_value='true',
                               description='Use simulation time if true'),
         DeclareLaunchArgument('follow_waypoints',
                               default_value='true',

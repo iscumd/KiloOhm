@@ -25,7 +25,7 @@ def generate_launch_description():
         'drive_mode_switch_button', default='7')
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
-    follow_waypoints = LaunchConfiguration('follow_waypoints', default='false')
+    follow_waypoints = LaunchConfiguration('follow_waypoints', default='true')
     gazebo_world = LaunchConfiguration(
         'gazebo_world', default='kohms_world_shapes.sdf')
 
