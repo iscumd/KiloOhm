@@ -143,10 +143,10 @@ controller_server:
       # https://github.com/ROBOTIS-GIT/turtlebot3_simulations/issues/75
       acc_lim_x: 2.5
       acc_lim_y: 0.0
-      acc_lim_theta: 3.2
+      acc_lim_theta: 1.0
       decel_lim_x: -2.5
       decel_lim_y: 0.0
-      decel_lim_theta: -3.2
+      decel_lim_theta: -1.0
       vx_samples: 20
       vy_samples: 0
       vtheta_samples: 20
@@ -187,8 +187,8 @@ local_costmap:
       plugins: ["voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 1.0
-        inflation_radius: 0.25
+        cost_scaling_factor: 10.0
+        inflation_radius: 0.55
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
@@ -227,7 +227,7 @@ global_costmap:
       global_frame: map
       robot_base_frame: base_footprint
       use_sim_time: False
-      robot_radius: 0.60
+      footprint: "[[-0.5, -0.4], [-0.5, 0.4], [0.5, 0.4], [0.5, -0.4]]"
       resolution: 0.05
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
@@ -254,8 +254,8 @@ global_costmap:
           inf_is_valid: false 
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 1.0
-        inflation_radius: 0.25
+        cost_scaling_factor: 10.0
+        inflation_radius: 0.70
       always_send_full_costmap: True
   global_costmap_client:
     ros__parameters:
@@ -280,7 +280,7 @@ map_saver:
 planner_server:
   ros__parameters:
     planner_plugins: ["GridBased"]
-    use_sim_time: True
+    use_sim_time: False
 
     GridBased:
       plugin: "nav2_smac_planner/SmacPlannerHybrid"
@@ -293,7 +293,7 @@ planner_server:
       angle_quantization_bins: 72         # Number of angle bins for search
       analytic_expansion_ratio: 3.5       # The ratio to attempt analytic expansions during search for final approach.
       analytic_expansion_max_length: 3.0  # For Hybrid/Lattice nodes: The maximum length of the analytic expansion to be considered valid to prevent unsafe shortcutting
-      minimum_turning_radius: 0.40        # minimum turning radius in m of path / vehicle
+      minimum_turning_radius: 0.80        # minimum turning radius in m of path / vehicle
       reverse_penalty: 2.0                # Penalty to apply if motion is reversing, must be => 1
       change_penalty: 0.0                 # Penalty to apply if motion is changing directions (L to R), must be >= 0
       non_straight_penalty: 1.2           # Penalty to apply if motion is non-straight, must be => 1
