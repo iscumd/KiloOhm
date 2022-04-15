@@ -210,7 +210,7 @@ def generate_launch_description():
         white_line_detection,
 
         # Drivers
-        #vectornav,
+        vectornav,
         realsense,
         roboteq,
         isc_sick,
