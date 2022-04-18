@@ -2,7 +2,14 @@
 <robot name="kohm">
 
 <!-- Base footprint -->
-    <link name="base_footprint"/>
+    <link name="base_footprint">
+    	<visual>
+    		<origin rpy="0 0 0" xyz="-0.285 0 0"/>
+    	</visual>
+    	<collision>
+    		<origin rpy="0 0 0" xyz="-0.285 0 0"/>
+    	</collision>
+    </link>
     
 <!--Chassis link and joint -->    
     <link name="base_link">
@@ -29,7 +36,7 @@
     </link>
     
     <joint name="base_footprint_to_base_link" type="fixed">
-        <origin rpy="0 0 0" xyz="0 0 0.225"/>
+        <origin rpy="0 0 0" xyz="0.285 0 0.225"/>
         <parent link="base_footprint"/>
         <child link="base_link"/>
     </joint>
