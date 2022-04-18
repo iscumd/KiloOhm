@@ -47,3 +47,7 @@ repositories:
     type: git
     url: https://github.com/dawonn/vectornav.git
     version: ros2
+  gps_waypoint_publisher:
+    type: git
+    url: https://github.com/andyblarblar/gps_waypoint_publisher
+    version: master

@@ -26,55 +26,44 @@ from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration
-from nav2_common.launch import RewrittenYaml
 
 from launch_ros.actions import Node
 
 
 def generate_launch_description():
     # ROS packages
-    pkg_kohm_gazebo = get_package_share_directory('kohm_robot')
+    pkg_kohm_robot = get_package_share_directory('kohm_robot')
 
     # Config
-    vn300_conf = os.path.join(pkg_kohm_gazebo,
-                              'config/vectornav',
-                              'vectornav.yaml')
-
+    waypoints = os.path.join(pkg_kohm_robot, 'config/waypoints',
+                             'IAVS_gps.txt')
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+    follow_waypoints = LaunchConfiguration('follow_waypoints', default='true')
 
-    param_substitutions = {
-        'use_sim_time': use_sim_time,
-    }  # TODO add usb port to these params later
-
-    configured_params = RewrittenYaml(source_file=vn300_conf,
-                                      root_key='',
-                                      param_rewrites=param_substitutions,
-                                      convert_types=True)
-
-    # Vectornav
-    start_vectornav_cmd = Node(
-        package='vectornav',
-        executable='vectornav',
-        output='screen',
-        parameters=[configured_params])
-
-    # Node that converts raw vectornav data to ros msgs
-    start_vectornav_sensor_msgs_cmd = Node(
-        package='vectornav',
-        executable='vn_sensor_msgs',
-        output='screen',
-        remappings=[('/vectornav/imu', '/kohm/gps/imu'), ('vectornav/gnss',
-                                                          '/kohm/navsat'), ('/vectornav/magnetic', '/kohm/mag')],
-        parameters=[configured_params])
+    # Nodes
+    gwp = Node(package='gps_waypoint_publisher',
+               executable='gps_waypoint_publisher',
+               name='gps_waypoint_publisher',
+               output='screen',
+               parameters=[{
+                   'filepath': waypoints
+               }, {
+                   'use_sim_time': use_sim_time
+               }],
+               remappings=[('/gps', '/kohm/navsat'), ('/mag', '/kohm/mag')],
+               condition=IfCondition(follow_waypoints))
 
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time',
                               default_value='false',
                               description='Use simulation time if true'),
+        DeclareLaunchArgument('follow_waypoints',
+                              default_value='true',
+                              description='Follow waypoints if true'),
         # Nodes
-        start_vectornav_cmd,
-        start_vectornav_sensor_msgs_cmd
+        gwp,
     ])

@@ -29,6 +29,7 @@ from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
+from launch.conditions import IfCondition, UnlessCondition
 
 
 def generate_launch_description():
@@ -45,9 +46,10 @@ def generate_launch_description():
     drive_mode_switch_button = LaunchConfiguration('drive_mode_switch_button', default='7')
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
-    follow_waypoints = LaunchConfiguration('follow_waypoints', default='false')
+    follow_waypoints = LaunchConfiguration('follow_waypoints', default='true')
+    gps_follow = LaunchConfiguration('use_gps_following', default='true')
     
-    
+    # Provides access to the roboteq controller
     roboteq = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch'),
@@ -56,6 +58,7 @@ def generate_launch_description():
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     ) 
     
+    # Publishes joint and tf things
     state_publishers = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch'),
@@ -64,6 +67,7 @@ def generate_launch_description():
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )    
     
+    # Provides cmd vel from joy inputs
     joy_with_teleop_twist = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_teleop_twist_joy, 'launch', 'teleop-launch.py')),
@@ -73,7 +77,8 @@ def generate_launch_description():
             'config_filepath': joy_config
         }.items(),
     )
-        
+
+    # Launches rviz
     rviz = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch'),
@@ -84,15 +89,8 @@ def generate_launch_description():
             'use_sim_time': use_sim_time
         }.items(),
     )
-
-    #lidar_processor = IncludeLaunchDescription( NOTE: no longer used as we are not using a 3d lidar
-    #    PythonLaunchDescriptionSource([
-    #        os.path.join(pkg_kohm_robot, 'launch'),
-    #        '/include/lidar_processor/lidar_processor.launch.py'
-    #    ]),
-    #    launch_arguments={'use_sim_time': use_sim_time}.items(),
-    #)
     
+    # Provides rviz visualization of things
     sensor_processor = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch'),
@@ -101,6 +99,7 @@ def generate_launch_description():
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
 
+    # Converts the merged pointclouds from camera and lidar into a scan
     pointcloud_to_laserscan = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch'),
@@ -109,6 +108,7 @@ def generate_launch_description():
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
 
+    # The entire nav2 + slamtoolbox stack lol
     navigation = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch'),
@@ -117,6 +117,9 @@ def generate_launch_description():
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
 
+    # Include either wpp or gwp depending on the launch option
+
+    # Followes waypoints set in a csv
     waypoint_publisher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch'),
@@ -126,8 +129,24 @@ def generate_launch_description():
             'use_sim_time': use_sim_time,
             'follow_waypoints': follow_waypoints
         }.items(),
+        condition=UnlessCondition(gps_follow)
     )
 
+    # Follows gps points set in a file
+    gps_waypoint_publisher = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch'),
+            '/include/gwp/gwp.launch.py'
+        ]),
+        launch_arguments={
+            'use_sim_time': use_sim_time,
+            'follow_waypoints': follow_waypoints
+        }.items(),
+        condition=IfCondition(gps_follow)
+    )
+
+    # Provides a state machine, and the node that provides the initalpose when a joy button is pressed.
+    # This publish is what starts auton.
     robot_state_controller = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_robot_state_controller, 'launch'),
@@ -139,6 +158,7 @@ def generate_launch_description():
         }.items(),
     )
 
+    # Publishes pointclouds where white lines are, allowing for lane following
     white_line_detection = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch/include/white_line_detection'),
@@ -149,6 +169,7 @@ def generate_launch_description():
         }.items(),
     )
     
+    # GPS driver
     vectornav = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch/include/vectornav'),
@@ -158,7 +179,8 @@ def generate_launch_description():
             'use_sim_time': use_sim_time
         }.items(),
     )
-        
+    
+    # Realsense driver (for both)
     realsense = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch/include/realsense'),
@@ -169,6 +191,7 @@ def generate_launch_description():
         }.items(),
     )
 
+    # SICK lidar driver
     isc_sick = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_kohm_robot, 'launch/include/isc_sick'),
@@ -196,6 +219,9 @@ def generate_launch_description():
         DeclareLaunchArgument('follow_waypoints',
                               default_value='false',
                               description='follow way points if true'),
+        DeclareLaunchArgument('use_gps_following',
+                              default_value='true',
+                              description='use gps following. The GPS will be on either way, just not used.'),
 
         # Nodes
         state_publishers,
@@ -206,6 +232,7 @@ def generate_launch_description():
         navigation,
         rviz,
         waypoint_publisher,
+        gps_waypoint_publisher,
         robot_state_controller,
         white_line_detection,
 
