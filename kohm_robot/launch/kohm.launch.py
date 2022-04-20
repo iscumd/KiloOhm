@@ -226,18 +226,18 @@ def generate_launch_description():
         joy_with_teleop_twist,
         
         sensor_processor,
-        #pointcloud_to_laserscan,
-        #navigation,
+        pointcloud_to_laserscan,
+        navigation,
         rviz,
-        #waypoint_publisher,
-        #gps_waypoint_publisher,
-        #robot_state_controller,
-        #white_line_detection,
+        waypoint_publisher,
+        gps_waypoint_publisher,
+        robot_state_controller,
+        white_line_detection,
 
         # Drivers
         vectornav,
-        #realsense,
-        #roboteq,
-        #isc_sick,
+        realsense,
+        roboteq,
+        isc_sick,
     ])
     
