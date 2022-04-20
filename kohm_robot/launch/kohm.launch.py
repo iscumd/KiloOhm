@@ -129,7 +129,6 @@ def generate_launch_description():
             'use_sim_time': use_sim_time,
             'follow_waypoints': follow_waypoints
         }.items(),
-        condition=UnlessCondition(gps_follow)
     )
 
     # Follows gps points set in a file
@@ -142,7 +141,6 @@ def generate_launch_description():
             'use_sim_time': use_sim_time,
             'follow_waypoints': follow_waypoints
         }.items(),
-        condition=IfCondition(gps_follow)
     )
 
     # Provides a state machine, and the node that provides the initalpose when a joy button is pressed.
@@ -228,18 +226,18 @@ def generate_launch_description():
         joy_with_teleop_twist,
         
         sensor_processor,
-        pointcloud_to_laserscan,
-        navigation,
+        #pointcloud_to_laserscan,
+        #navigation,
         rviz,
-        waypoint_publisher,
-        gps_waypoint_publisher,
-        robot_state_controller,
-        white_line_detection,
+        #waypoint_publisher,
+        #gps_waypoint_publisher,
+        #robot_state_controller,
+        #white_line_detection,
 
         # Drivers
         vectornav,
-        realsense,
-        roboteq,
-        isc_sick,
+        #realsense,
+        #roboteq,
+        #isc_sick,
     ])
     

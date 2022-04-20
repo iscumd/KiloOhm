@@ -53,8 +53,8 @@ def generate_launch_description():
                }, {
                    'use_sim_time': use_sim_time
                }],
-               remappings=[('/gps', '/kohm/navsat'), ('/mag', '/kohm/mag')],
-               condition=IfCondition(follow_waypoints))
+               remappings=[('/gps', '/kohm/navsat'), ('/mag', '/kohm/mag')])
+               #condition=IfCondition(follow_waypoints))
 
     return LaunchDescription([
         # Launch Arguments
