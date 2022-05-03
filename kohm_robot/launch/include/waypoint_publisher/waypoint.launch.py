@@ -42,6 +42,7 @@ def generate_launch_description():
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     follow_waypoints = LaunchConfiguration('follow_waypoints', default='true')
+    follow_gps = LaunchConfiguration('follow_gps', default='true')
 
     # Nodes
     waypoint_publisher = Node(package='waypoint',
@@ -52,8 +53,11 @@ def generate_launch_description():
                                   'filename': waypoints
                               }, {
                                   'use_sim_time': use_sim_time
+                              }, {
+                                  'follow_gps' : follow_gps
                               }],
-                              condition=IfCondition(follow_waypoints))
+                              #condition=IfCondition(follow_waypoints))
+    )
 
     return LaunchDescription([
         # Launch Arguments
@@ -63,6 +67,9 @@ def generate_launch_description():
         DeclareLaunchArgument('follow_waypoints',
                               default_value='true',
                               description='Follow waypoints if true'),
+        DeclareLaunchArgument('follow_gps',
+                              default_value='true',
+                              description='Follow gps if true'),
         # Nodes
         waypoint_publisher,
     ])

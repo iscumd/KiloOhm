@@ -127,7 +127,8 @@ def generate_launch_description():
         ]),
         launch_arguments={
             'use_sim_time': use_sim_time,
-            'follow_waypoints': follow_waypoints
+            'follow_waypoints': follow_waypoints,
+            'follow_gps' : gps_follow
         }.items(),
     )
 

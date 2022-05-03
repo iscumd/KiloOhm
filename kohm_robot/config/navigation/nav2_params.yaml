@@ -174,8 +174,8 @@ controller_server_rclcpp_node:
 local_costmap:
   local_costmap:
     ros__parameters:
-      update_frequency: 20.0
-      publish_frequency: 20.0
+      update_frequency: 3.0
+      publish_frequency: 5.0
       global_frame: odom
       robot_base_frame: base_footprint
       use_sim_time: False
@@ -211,6 +211,7 @@ local_costmap:
           obstacle_min_range: 0.0
       static_layer:
         map_subscribe_transient_local: True
+        subscribe_to_updates: True
       always_send_full_costmap: True
   local_costmap_client:
     ros__parameters:
@@ -222,8 +223,8 @@ local_costmap:
 global_costmap:
   global_costmap:
     ros__parameters:
-      update_frequency: 20.0
-      publish_frequency: 20.0
+      update_frequency: 3.0
+      publish_frequency: 5.0
       global_frame: map
       robot_base_frame: base_footprint
       use_sim_time: False
@@ -234,7 +235,7 @@ global_costmap:
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
         map_subscribe_transient_local: True
-        enabled: false
+        enabled: true
         subscribe_to_updates: true
         transform_tolerance: 0.3
       obstacle_layer:
