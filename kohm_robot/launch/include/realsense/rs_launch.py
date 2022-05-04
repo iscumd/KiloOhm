@@ -19,374 +19,157 @@ from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch.conditions import IfCondition
 
-configurable_parameters = [
-    {
-        'name': 'camera_name',
-        'default': 'camera',
-        'description': 'camera unique name'
-    },
-    {
-        'name': 'serial_no',
-        'default': "''",
-        'description': 'choose device by serial number'
-    },
-    {
-        'name': 'usb_port_id',
-        'default': "''",
-        'description': 'choose device by usb port id'
-    },
-    {
-        'name': 'device_type',
-        'default': "''",
-        'description': 'choose device by type'
-    },
-    {
-        'name': 'config_file',
-        'default': "''",
-        'description': 'yaml config file'
-    },
-    {
-        'name': 'enable_pointcloud',
-        'default': 'false',
-        'description': 'enable pointcloud'
-    },
-    {
-        'name': 'unite_imu_method',
-        'default': "''",
-        'description': '[copy|linear_interpolation]'
-    },
-    {
-        'name': 'json_file_path',
-        'default': "''",
-        'description': 'allows advanced configuration'
-    },
-    {
-        'name': 'log_level',
-        'default': 'info',
-        'description': 'debug log level [DEBUG|INFO|WARN|ERROR|FATAL]'
-    },
-    {
-        'name': 'output',
-        'default': 'screen',
-        'description': 'pipe node output [screen|log]'
-    },
-    {
-        'name': 'depth_width',
-        'default': '-1',
-        'description': 'depth image width'
-    },
-    {
-        'name': 'depth_height',
-        'default': '-1',
-        'description': 'depth image height'
-    },
-    {
-        'name': 'enable_depth',
-        'default': 'false',
-        'description': 'enable depth stream'
-    },
-    {
-        'name': 'color_width',
-        'default': '-1',
-        'description': 'color image width'
-    },
-    {
-        'name': 'color_height',
-        'default': '-1',
-        'description': 'color image height'
-    },
-    {
-        'name': 'enable_color',
-        'default': 'true',
-        'description': 'enable color stream'
-    },
-    {
-        'name': 'infra_width',
-        'default': '-1',
-        'description': 'infra width'
-    },
-    {
-        'name': 'infra_height',
-        'default': '-1',
-        'description': 'infra width'
-    },
-    {
-        'name': 'enable_infra1',
-        'default': 'false',
-        'description': 'enable infra1 stream'
-    },
-    {
-        'name': 'enable_infra2',
-        'default': 'false',
-        'description': 'enable infra2 stream'
-    },
-    {
-        'name': 'infra_rgb',
-        'default': 'false',
-        'description': 'enable infra2 stream'
-    },
-    {
-        'name': 'fisheye_width',
-        'default': '-1',
-        'description': 'fisheye width'
-    },
-    {
-        'name': 'fisheye_height',
-        'default': '-1',
-        'description': 'fisheye width'
-    },
-    {
-        'name': 'enable_fisheye1',
-        'default': 'true',
-        'description': 'enable fisheye1 stream'
-    },
-    {
-        'name': 'enable_fisheye2',
-        'default': 'true',
-        'description': 'enable fisheye2 stream'
-    },
-    {
-        'name': 'confidence_width',
-        'default': '-1',
-        'description': 'depth image width'
-    },
-    {
-        'name': 'confidence_height',
-        'default': '-1',
-        'description': 'depth image height'
-    },
-    {
-        'name': 'enable_confidence',
-        'default': 'true',
-        'description': 'enable depth stream'
-    },
-    {
-        'name': 'fisheye_fps',
-        'default': '-1.',
-        'description': ''
-    },
-    {
-        'name': 'depth_fps',
-        'default': '-1.',
-        'description': ''
-    },
-    {
-        'name': 'confidence_fps',
-        'default': '-1.',
-        'description': ''
-    },
-    {
-        'name': 'infra_fps',
-        'default': '-1.',
-        'description': ''
-    },
-    {
-        'name': 'color_fps',
-        'default': '-1.',
-        'description': ''
-    },
-    {
-        'name': 'gyro_fps',
-        'default': '-1.',
-        'description': ''
-    },
-    {
-        'name': 'accel_fps',
-        'default': '-1.',
-        'description': ''
-    },
-    {
-        'name': 'color_qos',
-        'default': 'SYSTEM_DEFAULT',
-        'description': 'QoS profile name'
-    },
-    {
-        'name': 'confidence_qos',
-        'default': 'SYSTEM_DEFAULT',
-        'description': 'QoS profile name'
-    },
-    {
-        'name': 'depth_qos',
-        'default': 'SYSTEM_DEFAULT',
-        'description': 'QoS profile name'
-    },
-    {
-        'name': 'fisheye_qos',
-        'default': 'SYSTEM_DEFAULT',
-        'description': 'QoS profile name'
-    },
-    {
-        'name': 'infra_qos',
-        'default': 'SYSTEM_DEFAULT',
-        'description': 'QoS profile name'
-    },
-    {
-        'name': 'pointcloud_qos',
-        'default': 'SYSTEM_DEFAULT',
-        'description': 'QoS profile name'
-    },
-    {
-        'name': 'enable_gyro',
-        'default': 'false',
-        'description': ''
-    },
-    {
-        'name': 'enable_accel',
-        'default': 'false',
-        'description': ''
-    },
-    {
-        'name': 'pointcloud_texture_stream',
-        'default': 'RS2_STREAM_COLOR',
-        'description': 'testure stream for pointcloud'
-    },
-    {
-        'name': 'pointcloud_texture_index',
-        'default': '0',
-        'description': 'testure stream index for pointcloud'
-    },
-    {
-        'name': 'enable_sync',
-        'default': 'false',
-        'description': ''
-    },
-    {
-        'name': 'align_depth',
-        'default': 'false',
-        'description': ''
-    },
-    {
-        'name': 'filters',
-        'default': "''",
-        'description': ''
-    },
-    {
-        'name': 'clip_distance',
-        'default': '-2.',
-        'description': ''
-    },
-    {
-        'name': 'linear_accel_cov',
-        'default': '0.01',
-        'description': ''
-    },
-    {
-        'name': 'initial_reset',
-        'default': 'false',
-        'description': ''
-    },
-    {
-        'name': 'allow_no_texture_points',
-        'default': 'false',
-        'description': ''
-    },
-    {
-        'name': 'ordered_pc',
-        'default': 'false',
-        'description': ''
-    },
-    {
-        'name': 'calib_odom_file',
-        'default': "''",
-        'description': "''"
-    },
-    {
-        'name': 'topic_odom_in',
-        'default': "''",
-        'description': 'topic for T265 wheel odometry'
-    },
-    {
-        'name': 'tf_publish_rate',
-        'default': '20.0',
-        'description': 'Rate of publishing static_tf'
-    },
-    {
-        'name': 'diagnostics_period',
-        'default': '0.0',
-        'description': 'Rate of publishing diagnostics. 0=Disabled'
-    },
-    {
-        'name': 'rosbag_filename',
-        'default': "''",
-        'description': 'A realsense bagfile to run from as a device'
-    },
-    {
-        'name': 'temporal.holes_fill',
-        'default': '0',
-        'description': 'Persistency mode'
-    },
-    {
-        'name': 'stereo_module.exposure.1',
-        'default': '7500',
-        'description': 'Initial value for hdr_merge filter'
-    },
-    {
-        'name': 'rgb_camera.auto_exposure_roi.bottom',
-        'default': '479',
-        'description' : ''
-    },
-    {
-        'name': 'rgb_camera.auto_exposure_roi.left',
-        'default': '0',
-        'description' : ''
-    },
-    {
-        'name': 'rgb_camera.auto_exposure_roi.right',
-        'default': '847',
-        'description' : ''
-    },
-    {
-        'name': 'rgb_camera.auto_exposure_roi.top',
-        'default': '0',
-        'description' : ''
-    },
-    {
-        'name': 'stereo_module.gain.1',
-        'default': '16',
-        'description': 'Initial value for hdr_merge filter'
-    },
-    {
-        'name': 'stereo_module.exposure.2',
-        'default': '1',
-        'description': 'Initial value for hdr_merge filter'
-    },
-    {
-        'name': 'stereo_module.gain.2',
-        'default': '16',
-        'description': 'Initial value for hdr_merge filter'
-    },
-    {
-        'name': 'wait_for_device_timeout',
-        'default': '-1.',
-        'description': 'Timeout for waiting for device to connect (Seconds)'
-    },
-    {
-        'name': 'reconnect_timeout',
-        'default': '6.',
-        'description':
-        'Timeout(seconds) between consequtive reconnection attempts'
-    },
-    {
-        'name': 'odom_frame_id',
-        'default': 'odom',
-        'description': 'set odom frame'
-    },
+configurable_parameters = [{'name': 'camera_name',                  'default': 'camera', 'description': 'camera unique name'},
+                           {'name': 'serial_no',                    'default': "''",
+                               'description': 'choose device by serial number'},
+                           {'name': 'usb_port_id',                  'default': "''",
+                               'description': 'choose device by usb port id'},
+                           {'name': 'device_type',                  'default': "''",
+                               'description': 'choose device by type'},
+                           {'name': 'config_file',
+                               'default': "''", 'description': 'yaml config file'},
+                           {'name': 'enable_pointcloud',
+                               'default': 'false', 'description': 'enable pointcloud'},
+                           {'name': 'unite_imu_method',             'default': "''",
+                               'description': '[copy|linear_interpolation]'},
+                           {'name': 'json_file_path',               'default': "''",
+                               'description': 'allows advanced configuration'},
+                           {'name': 'log_level',                    'default': 'info',
+                               'description': 'debug log level [DEBUG|INFO|WARN|ERROR|FATAL]'},
+                           {'name': 'output',                       'default': 'screen',
+                               'description': 'pipe node output [screen|log]'},
+                           {'name': 'depth_width',                  'default': '-1',
+                               'description': 'depth image width'},
+                           {'name': 'depth_height',                 'default': '-1',
+                               'description': 'depth image height'},
+                           {'name': 'enable_depth',                 'default': 'false',
+                               'description': 'enable depth stream'},
+                           {'name': 'color_width',                  'default': '-1',
+                               'description': 'color image width'},
+                           {'name': 'color_height',                 'default': '-1',
+                               'description': 'color image height'},
+                           {'name': 'enable_color',                 'default': 'true',
+                               'description': 'enable color stream'},
+                           {'name': 'infra_width',
+                               'default': '-1', 'description': 'infra width'},
+                           {'name': 'infra_height',
+                               'default': '-1', 'description': 'infra width'},
+                           {'name': 'enable_infra1',                'default': 'false',
+                               'description': 'enable infra1 stream'},
+                           {'name': 'enable_infra2',                'default': 'false',
+                               'description': 'enable infra2 stream'},
+                           {'name': 'infra_rgb',                    'default': 'false',
+                               'description': 'enable infra2 stream'},
+                           {'name': 'fisheye_width',
+                               'default': '-1', 'description': 'fisheye width'},
+                           {'name': 'fisheye_height',
+                               'default': '-1', 'description': 'fisheye width'},
+                           {'name': 'enable_fisheye1',              'default': 'true',
+                               'description': 'enable fisheye1 stream'},
+                           {'name': 'enable_fisheye2',              'default': 'true',
+                               'description': 'enable fisheye2 stream'},
+                           {'name': 'confidence_width',
+                               'default': '-1', 'description': 'depth image width'},
+                           {'name': 'confidence_height',            'default': '-1',
+                               'description': 'depth image height'},
+                           {'name': 'enable_confidence',            'default': 'true',
+                               'description': 'enable depth stream'},
+                           {'name': 'fisheye_fps',
+                               'default': '-1.', 'description': ''},
+                           {'name': 'depth_fps',
+                               'default': '-1.', 'description': ''},
+                           {'name': 'confidence_fps',
+                               'default': '-1.', 'description': ''},
+                           {'name': 'infra_fps',
+                               'default': '-1.', 'description': ''},
+                           {'name': 'color_fps',
+                               'default': '-1.', 'description': ''},
+                           {'name': 'gyro_fps',
+                               'default': '-1.', 'description': ''},
+                           {'name': 'accel_fps',
+                               'default': '-1.', 'description': ''},
+                           {'name': 'color_qos',
+                               'default': 'SYSTEM_DEFAULT', 'description': 'QoS profile name'},
+                           {'name': 'confidence_qos',
+                               'default': 'SYSTEM_DEFAULT', 'description': 'QoS profile name'},
+                           {'name': 'depth_qos',
+                               'default': 'SYSTEM_DEFAULT', 'description': 'QoS profile name'},
+                           {'name': 'fisheye_qos',
+                               'default': 'SYSTEM_DEFAULT', 'description': 'QoS profile name'},
+                           {'name': 'infra_qos',
+                               'default': 'SYSTEM_DEFAULT', 'description': 'QoS profile name'},
+                           {'name': 'pointcloud_qos',
+                               'default': 'SYSTEM_DEFAULT', 'description': 'QoS profile name'},
+                           {'name': 'enable_gyro',
+                               'default': 'false', 'description': ''},
+                           {'name': 'enable_accel',
+                               'default': 'false', 'description': ''},
+                           {'name': 'pointcloud_texture_stream',    'default': 'RS2_STREAM_COLOR',
+                               'description': 'testure stream for pointcloud'},
+                           {'name': 'pointcloud_texture_index',     'default': '0',
+                               'description': 'testure stream index for pointcloud'},
+                           {'name': 'enable_sync',
+                               'default': 'false', 'description': ''},
+                           {'name': 'align_depth',
+                               'default': 'false', 'description': ''},
+                           {'name': 'filters',
+                               'default': "''", 'description': ''},
+                           {'name': 'clip_distance',
+                               'default': '-2.', 'description': ''},
+                           {'name': 'linear_accel_cov',
+                               'default': '0.01', 'description': ''},
+                           {'name': 'initial_reset',
+                               'default': 'false', 'description': ''},
+                           {'name': 'allow_no_texture_points',
+                               'default': 'false', 'description': ''},
+                           {'name': 'ordered_pc',
+                               'default': 'false', 'description': ''},
+                           {'name': 'calib_odom_file',
+                               'default': "''", 'description': "''"},
+                           {'name': 'topic_odom_in',                'default': "''",
+                               'description': 'topic for T265 wheel odometry'},
+                           {'name': 'tf_publish_rate',              'default': '0.0',
+                               'description': 'Rate of publishing static_tf'},
+                           {'name': 'diagnostics_period',           'default': '0.0',
+                               'description': 'Rate of publishing diagnostics. 0=Disabled'},
+                           {'name': 'rosbag_filename',              'default': "''",
+                               'description': 'A realsense bagfile to run from as a device'},
+                           {'name': 'temporal.holes_fill',
+                               'default': '0', 'description': 'Persistency mode'},
+                           {'name': 'stereo_module.exposure.1',     'default': '7500',
+                               'description': 'Initial value for hdr_merge filter'},
+                           {'name': 'stereo_module.gain.1',         'default': '16',
+                               'description': 'Initial value for hdr_merge filter'},
+                           {'name': 'stereo_module.exposure.2',     'default': '1',
+                               'description': 'Initial value for hdr_merge filter'},
+                           {'name': 'stereo_module.gain.2',         'default': '16',
+                               'description': 'Initial value for hdr_merge filter'},
+                           {'name': 'wait_for_device_timeout',      'default': '-1.',
+                               'description': 'Timeout for waiting for device to connect (Seconds)'},
+                           {'name': 'reconnect_timeout',            'default': '6.',
+                               'description': 'Timeout(seconds) between consequtive reconnection attempts'},
+                           {
+    'name': 'odom_frame_id',
+    'default': 'odom',
+    'description': 'set odom frame'
+},
     {
         'name': 'pose_frame_id',
         'default': 'base_footprint',
         'description': 'set pose frame'
-    },
+},
     {
         'name': 'publish_tf',
         'default': 'false',
         'description': 'publish tf'
-    },
+},
     {
         'name': 'color_optical_frame_id',
         'default': 'camera_link',
         'description': 'set frame id of camera'
-    },
+},
 ]
+
 
 def declare_configurable_parameters(parameters):
     return [
@@ -464,7 +247,7 @@ def generate_launch_description():
                     remappings=[
                         ('/D435/color/camera_info', '/kohm/camera_info'),
                         ('/D435/color/image_raw', '/kohm/image_raw'),
-                        ('/T265/odom/sample', '/kohm/odom'),  
+                        ('/T265/odom/sample', '/kohm/realsense/odom'),
                         ('/T265/imu', '/kohm/realsense/imu'),
                     ],
                     output='screen',
@@ -489,8 +272,8 @@ def generate_launch_description():
                     remappings=[
                         ('/D435/color/camera_info', '/kohm/camera_info'),
                         ('/D435/color/image_raw', '/kohm/image_raw'),
-                        ('/T265/odom/sample', '/kohm/odom'),                         
-                        ('/T265/imu', '/kohm/realsense/imu'),                         
+                        ('/T265/odom/sample', '/kohm/realsense/odom'),
+                        ('/T265/imu', '/kohm/realsense/imu'),
                     ],
                     output='screen',
                     arguments=[

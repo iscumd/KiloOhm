@@ -254,6 +254,7 @@ def generate_launch_description():
         gps_waypoint_publisher,
         robot_state_controller,
         white_line_detection,
+        robot_localization,
 
         # Drivers
         vectornav,
