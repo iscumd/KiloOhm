@@ -44,7 +44,9 @@ def generate_launch_description():
         name='ekf_filter_node',
         output='screen',
         parameters=[robot_localization_file_path, 
-        {'use_sim_time': use_sim_time}])
+        {'use_sim_time': use_sim_time}],
+        remappings=[('/odometry/filtered', '/kohm/odom')],
+    )
 
     return LaunchDescription([
         # Launch Arguments
