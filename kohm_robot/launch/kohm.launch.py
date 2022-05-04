@@ -201,6 +201,26 @@ def generate_launch_description():
         }.items(),
     )
 
+    robot_localization = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch/include/robot_localization'),
+            '/localization.launch.py'
+        ]),
+        launch_arguments={
+            'use_sim_time': use_sim_time
+        }.items(),
+    )
+
+    encoder_odom = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_kohm_robot, 'launch/include/encoder_odom'),
+            '/encoder.launch.py'
+        ]),
+        launch_arguments={
+            'use_sim_time': use_sim_time
+        }.items(),
+    )
+
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument(
