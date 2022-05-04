@@ -42,7 +42,13 @@ def generate_launch_description():
         remappings=[
             ('/robot/left_encoder_counts', '/kohm/left_encoder_counts'),
             ('/robot/right_encoder_counts', '/kohm/right_encoder_counts'),
-            ('/robot/encoder_odom', '/kohm/encoder_odom'),
+            ('/robot/encoder_odom', '/kohm/encoder/odom'),
+        ],
+        parameters=[
+            {'use_sim_time': use_sim_time},
+            {'wheel_radius': 0.33},
+            {'wheel_seperation': 0.17},
+            {'gear_ratio': 18.0},
         ],
     )
 
