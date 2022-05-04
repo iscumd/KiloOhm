@@ -82,7 +82,7 @@ configurable_parameters = [
     },
     {
         'name': 'enable_depth',
-        'default': 'true',
+        'default': 'false',
         'description': 'enable depth stream'
     },
     {
@@ -112,12 +112,12 @@ configurable_parameters = [
     },
     {
         'name': 'enable_infra1',
-        'default': 'true',
+        'default': 'false',
         'description': 'enable infra1 stream'
     },
     {
         'name': 'enable_infra2',
-        'default': 'true',
+        'default': 'false',
         'description': 'enable infra2 stream'
     },
     {
@@ -319,6 +319,26 @@ configurable_parameters = [
         'name': 'stereo_module.exposure.1',
         'default': '7500',
         'description': 'Initial value for hdr_merge filter'
+    },
+    {
+        'name': 'rgb_camera.auto_exposure_roi.bottom',
+        'default': '479',
+        'description' : ''
+    },
+    {
+        'name': 'rgb_camera.auto_exposure_roi.left',
+        'default': '0',
+        'description' : ''
+    },
+    {
+        'name': 'rgb_camera.auto_exposure_roi.right',
+        'default': '847',
+        'description' : ''
+    },
+    {
+        'name': 'rgb_camera.auto_exposure_roi.top',
+        'default': '0',
+        'description' : ''
     },
     {
         'name': 'stereo_module.gain.1',
