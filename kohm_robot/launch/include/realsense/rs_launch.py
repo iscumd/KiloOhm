@@ -87,12 +87,12 @@ configurable_parameters = [
     },
     {
         'name': 'color_width',
-        'default': '-1',
+        'default': '424',
         'description': 'color image width'
     },
     {
         'name': 'color_height',
-        'default': '-1',
+        'default': '240',
         'description': 'color image height'
     },
     {
@@ -182,7 +182,7 @@ configurable_parameters = [
     },
     {
         'name': 'color_fps',
-        'default': '-1.',
+        'default': '30.0',
         'description': ''
     },
     {
@@ -297,7 +297,7 @@ configurable_parameters = [
     },
     {
         'name': 'tf_publish_rate',
-        'default': '20.0',
+        'default': '0.0',
         'description': 'Rate of publishing static_tf'
     },
     {
