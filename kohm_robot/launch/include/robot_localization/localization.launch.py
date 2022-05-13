@@ -45,7 +45,7 @@ def generate_launch_description():
         output='screen',
         parameters=[robot_localization_file_path, 
         {'use_sim_time': use_sim_time}],
-        remappings=[('/odometry/filtered', '/kohm/odom')],
+        #remappings=[('/odometry/filtered', '/kohm/odom')],
     )
 
     return LaunchDescription([
