@@ -15,6 +15,7 @@ slam_toolbox:
     base_frame: base_footprint
     scan_topic: /scan
     mode: mapping
+    #publish_odom: false
     # if you'd like to immediately start continuing a map at a given pose
     # or at the dock, but they are mutually exclusive, if pose is given
     # will use pose

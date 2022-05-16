@@ -465,7 +465,7 @@ def generate_launch_description():
                     remappings=[
                         ('/D435/color/camera_info', '/kohm/camera_info'),
                         ('/D435/color/image_raw', '/kohm/image_raw'),
-                        ('/T265/odom/sample', '/kohm/realsense/odom'),
+                        ('/T265/odom/sample', '/kohm/odom'),
                         ('/T265/imu', '/kohm/realsense/imu'),
                     ],
                     output='screen',
@@ -490,7 +490,7 @@ def generate_launch_description():
                     remappings=[
                         ('/D435/color/camera_info', '/kohm/camera_info'),
                         ('/D435/color/image_raw', '/kohm/image_raw'),
-                        ('/T265/odom/sample', '/kohm/realsense/odom'),
+                        ('/T265/odom/sample', '/kohm/odom'),
                         ('/T265/imu', '/kohm/realsense/imu'),
                     ],
                     output='screen',
