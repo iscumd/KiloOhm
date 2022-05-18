@@ -10,6 +10,6 @@ To use the T265 tracking camera with the EKF you must ensure that both launch pa
 ### EKF Issues
 We ran into a couple of issues while trying to use the ekf including KiloOhm being transformed above the costmap which was a result of fusing 3D variables into the EKF node. This issues manifested for us a the error `sensor origin is out of map frame`. This error will also manifest if whichever node providing the odom -> base_footprint transform is transforming Z, roll or pitch. In our case the Intel Realsense T265 tracking camera which was providing the odom -> base_footprint transform was transforming KiloOhm in 3D resulting in the sensor origin issue.
 
-### Doc!
+### Docs!
 For more information regarding explanation, setup and configuration of the robot localization node please see the docs [here!](https://docs.ros.org/en/noetic/api/robot_localization/html/state_estimation_nodes.html#ekf-localization-node)
 
