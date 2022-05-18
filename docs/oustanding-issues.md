@@ -1,4 +1,4 @@
-### The many outstanding issues of Ohm
+# The many outstanding issues of Ohm
 
 Ohm is a troubled robot. Despite our efforts, some bugs persist and must be lived with. This file is a documentation of these issues.
 

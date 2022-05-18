@@ -1,4 +1,4 @@
-### On nav2 Jank
+# On nav2 Jank
 
 While working with nav2 (at least on Galactic) I discovered that the waypoint follower plugin has a bug where after 10 seconds of following a point, a tf transform exception causes it to die. 
 

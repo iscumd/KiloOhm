@@ -9,19 +9,21 @@ TODO very wip
 - `/kohm/gps/imu`: vectornav imu data
 
 ### Odom topics 
-- `/kohm/odom`: Currently the t265's VIO
+- `/kohm/odom`: Currently the EKF odom
+- `/kohm/realsense/odom`: T265 VIO
 
-### Encoder topics
+### Encoder topics (currently broken)
 - `/kohm/left_encoder_counts`: Left encoder values
 - `/kohm/right_encoder_counts`: Right encoder values
 
 ### GPS topics
 - `/kohm/navsat`: vectornav gps location
 - `/kohm/mag`: vectornav magnetometer readings
+- `/vectornav/pose`: vectornav world pose 
 
 ### Image topics
 - `/kohm/camera_info`: Camera calibration from realsense
-- `/kohm/image_raw`: images from realsense depth
+- `/kohm/image_raw`: images from realsense 
 
 ### Point topics
 - `/sick/scan`: Raw scans from the SICK
@@ -37,4 +39,3 @@ The scan pipeline:
 - `/cmd_vel`: Control vel from teleop. Passthrough is only allowed when in teleop by drive_mode_switch
 - `/nav_vel`: Control vel from auton. Passthrough is only allowed when in auton by drive_mode_switch
 - `/joy`: Teleop inputs
-- 
