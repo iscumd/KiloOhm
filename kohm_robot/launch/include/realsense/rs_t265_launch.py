@@ -69,6 +69,11 @@ local_parameters = [
         'default': 'false',
         'description': 'publish tf'
     },
+    {
+        'name': 'publish_odom_tf',
+        'default': 'false',
+        'description': 'publish odom tf'
+    },
 ]
 
 

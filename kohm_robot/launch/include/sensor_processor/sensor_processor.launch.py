@@ -40,7 +40,7 @@ def generate_launch_description():
         remappings=[
             ('/camera/image_raw', '/kohm/image_raw'),
             ('/camera/unfiltered_image_raw', '/kohm/unfiltered_image_raw'),
-            ('/robot/odom_raw', '/odometry/filtered'),
+            #('/robot/odom_raw', '/kohm/realsense/odom'),
         ],
         parameters=[{
             'use_sim_time': use_sim_time
