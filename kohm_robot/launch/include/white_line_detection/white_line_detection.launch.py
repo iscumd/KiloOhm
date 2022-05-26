@@ -54,7 +54,7 @@ def generate_launch_description():
         parameters=[
             {'use_sim_time': use_sim_time},
             {'params_file': white_line_params_file},
-            {'thresholder': 'basic'},
+            {'thresholder': 'isc.dyn_gauss'},
         ])
 
     return LaunchDescription([

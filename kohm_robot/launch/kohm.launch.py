@@ -47,7 +47,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
     follow_waypoints = LaunchConfiguration('follow_waypoints', default='true')
-    gps_follow = LaunchConfiguration('use_gps_following', default='true')
+    gps_follow = LaunchConfiguration('use_gps_following', default='false')
     
     # Provides access to the roboteq controller
     roboteq = IncludeLaunchDescription(
@@ -239,7 +239,7 @@ def generate_launch_description():
                               default_value='false',
                               description='follow way points if true'),
         DeclareLaunchArgument('use_gps_following',
-                              default_value='true',
+                              default_value='false',
                               description='use gps following. The GPS will be on either way, just not used.'),
 
         # Nodes

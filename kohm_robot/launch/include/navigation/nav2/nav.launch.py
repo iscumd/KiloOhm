@@ -45,7 +45,8 @@ def generate_launch_description():
    
     param_substitutions = {
         'use_sim_time': use_sim_time,
-        'default_bt_xml_filename': default_bt_xml_filename,
+        'default_nav_through_poses_bt_xml': default_bt_xml_filename,
+        'default_nav_to_pose_bt_xml': default_bt_xml_filename,
         'autostart': autostart,
         'map_subscribe_transient_local': map_subscribe_transient_local
     }
@@ -77,8 +78,8 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'default_bt_xml_filename',
             default_value=os.path.join(
-                get_package_share_directory('nav2_bt_navigator'),
-                'behavior_trees', 'navigate_w_replanning_and_recovery.xml'),
+                get_package_share_directory('kohm_robot'),
+                'config', 'navigation', 'bt_without_spin.xml'),
             description='Full path to the behavior tree xml file to use'),
         DeclareLaunchArgument(
             'map_subscribe_transient_local',
