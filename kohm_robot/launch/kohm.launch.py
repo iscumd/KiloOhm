@@ -236,10 +236,10 @@ def generate_launch_description():
                               default_value='true',
                               description='Open rviz if true'),
         DeclareLaunchArgument('follow_waypoints',
-                              default_value='false',
+                              default_value='true',
                               description='follow way points if true'),
         DeclareLaunchArgument('use_gps_following',
-                              default_value='false',
+                              default_value='true',
                               description='use gps following. The GPS will be on either way, just not used.'),
 
         # Nodes
