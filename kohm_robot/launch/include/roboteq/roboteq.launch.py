@@ -50,7 +50,8 @@ def generate_launch_description():
         output='screen',
         remappings=[('/cmd_vel','/robot/cmd_vel'),
         ('/robot/left_encoder_counts', '/kohm/left_encoder_counts'),
-        ('/robot/right_encoder_counts', '/kohm/right_encoder_counts')],
+        ('/robot/right_encoder_counts', '/kohm/right_encoder_counts'),
+        ('/robot/motor_speeds', '/kohm/debug/motor_speeds')],
         parameters=[roboteq_config],
     )
 
