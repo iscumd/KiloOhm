@@ -147,7 +147,7 @@ def generate_launch_description():
                               default_value='true',
                               description='Open rviz if true'),
         DeclareLaunchArgument('follow_waypoints',
-                              default_value='false',
+                              default_value='true',
                               description='follow way points if true'),
         DeclareLaunchArgument('gazebo_world',
                               default_value='kohms_world_shapes.sdf',
